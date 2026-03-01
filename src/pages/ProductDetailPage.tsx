@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useProductDetail } from '../features/product-detail/hooks/useProductDetail';
 import { useProducts } from '../features/catalog/hooks/useProducts';
-import { useCartStore } from '../store/cart.store';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem as addItemAction } from '../store/cartSlice';
+import type { RootState, AppDispatch } from '../store/store';
 import { Navbar } from '../shared/components/layout/Navbar/Navbar';
 import { Footer } from '../shared/components/layout/Footer/Footer';
 import { Skeleton } from '../shared/components/ui/Skeleton/Skeleton';
 import { QuantityStepper } from '../features/product-detail/components/QuantityStepper/QuantityStepper';
 import { formatCOP } from '../shared/utils/currency';
+import { useToast } from '../shared/hooks/useToast';
 import styles from './ProductDetailPage.module.css';
 
 // ── Star Rating ──────────────────────────────────────────────────────────────
@@ -52,8 +55,14 @@ export const ProductDetailPage: React.FC = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedImg, setSelectedImg] = useState(0);
 
-  const addItem = useCartStore((s) => s.addItem);
-  const totalItems = useCartStore((s) => s.getTotalItems());
+  const dispatch = useDispatch<AppDispatch>();
+  const totalItems = useSelector((state: RootState) =>
+    state.cart.items.reduce((sum, i) => sum + i.quantity, 0),
+  );
+  const addItem = (product: Parameters<typeof addItemAction>[0]['product'], qty = 1) =>
+    dispatch(addItemAction({ product, quantity: qty }));
+
+  const toast = useToast();
 
   const { product, isLoading, error } = useProductDetail(id);
   const { data: allProducts = [] } = useProducts();
@@ -68,7 +77,10 @@ export const ProductDetailPage: React.FC = () => {
     : [];
 
   const handleAddToCart = () => {
-    if (product) addItem(product, quantity);
+    if (product) {
+      addItem(product, quantity);
+      toast.success(`${product.name} agregado al carrito`);
+    }
   };
 
   const handleBuyNow = () => {

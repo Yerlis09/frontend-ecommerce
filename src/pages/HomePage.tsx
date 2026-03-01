@@ -1,5 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem as addItemAction } from '../store/cartSlice';
+import type { AppDispatch, RootState } from '../store/store';
 import { Navbar } from '../shared/components/layout/Navbar/Navbar';
 import { Footer } from '../shared/components/layout/Footer/Footer';
 import { HeroBanner, CategoryChips, ProductGrid } from '../features/catalog';
@@ -7,17 +10,41 @@ import { useProducts } from '../features/catalog/hooks/useProducts';
 import { useFilters } from '../features/catalog/hooks/useFilters';
 import { mapProductDto } from '../features/catalog/utils/mapProduct';
 import { Skeleton } from '../shared/components/ui/Skeleton/Skeleton';
-import type { Category } from '../features/catalog/types/product.types';
-
-const STATIC_CATEGORIES: Category[] = [
-  { id: 'all', name: 'All', icon: 'grid_view' },
-  { id: 'electronics', name: 'Electronics', icon: 'devices' },
-  { id: 'fashion', name: 'Fashion', icon: 'checkroom' },
-  { id: 'home', name: 'Home', icon: 'chair' },
-  { id: 'beauty', name: 'Beauty', icon: 'face' },
-  { id: 'sports', name: 'Sports', icon: 'sports_soccer' },
-  { id: 'kids', name: 'Kids', icon: 'toys' },
+import { useToast } from '../shared/hooks/useToast';
+/** Mapeo de palabras clave (sin tildes, minúsculas) → icono de Material Symbols */
+const ICON_MAP: [string, string][] = [
+  ['electronic', 'devices'],   ['electronica', 'devices'],  ['tech', 'devices'],
+  ['tecnologia', 'devices'],   ['computador', 'computer'],  ['computer', 'computer'],
+  ['phone', 'smartphone'],     ['celular', 'smartphone'],   ['movil', 'smartphone'],
+  ['audio', 'headphones'],     ['gaming', 'sports_esports'],
+  ['fashion', 'checkroom'],    ['moda', 'checkroom'],       ['ropa', 'checkroom'],
+  ['clothing', 'checkroom'],   ['zapatos', 'steps'],        ['shoes', 'steps'],
+  ['calzado', 'steps'],        ['accessories', 'watch'],    ['accesorios', 'watch'],
+  ['home', 'chair'],           ['hogar', 'chair'],          ['furniture', 'chair'],
+  ['muebles', 'chair'],        ['kitchen', 'kitchen'],      ['cocina', 'kitchen'],
+  ['garden', 'yard'],          ['jardin', 'yard'],
+  ['beauty', 'face'],          ['belleza', 'face'],         ['cosmetic', 'face'],
+  ['cosmetica', 'face'],       ['perfume', 'local_florist'],['skincare', 'face_3'],
+  ['hair', 'content_cut'],
+  ['sport', 'sports_soccer'],  ['deporte', 'sports_soccer'],['fitness', 'fitness_center'],
+  ['gym', 'fitness_center'],   ['outdoor', 'hiking'],
+  ['kids', 'toys'],            ['ninos', 'toys'],           ['baby', 'toys'],
+  ['bebe', 'toys'],            ['juguete', 'toys'],         ['toy', 'toys'],
+  ['food', 'restaurant'],      ['comida', 'restaurant'],    ['alimento', 'restaurant'],
+  ['grocery', 'shopping_basket'],['supermercado', 'shopping_basket'],
+  ['book', 'menu_book'],       ['libro', 'menu_book'],      ['education', 'school'],
+  ['educacion', 'school'],     ['pet', 'pets'],             ['mascota', 'pets'],
+  ['health', 'health_and_safety'],['salud', 'health_and_safety'],['pharmacy', 'medication'],
 ];
+
+const normalize = (s: string) =>
+  s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+const getIconForCategory = (category: string): string => {
+  const n = normalize(category);
+  const match = ICON_MAP.find(([key]) => n.includes(key));
+  return match ? match[1] : 'sell';
+};
 
 const ProductGridSkeleton: React.FC = () => (
   <div
@@ -40,6 +67,12 @@ const ProductGridSkeleton: React.FC = () => (
 
 export const HomePage: React.FC = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const toast = useToast();
+  const cartItemCount = useSelector((state: RootState) =>
+    state.cart.items.reduce((sum, i) => sum + i.quantity, 0),
+  );
+
   const { data: productDtos = [], isLoading, isError } = useProducts();
 
   // useFilters trabaja con ProductResponseDto (tiene `description` para búsqueda)
@@ -51,13 +84,14 @@ export const HomePage: React.FC = () => {
     [filteredDtos]
   );
 
-  // Añade dinámicamente categorías que vengan del backend y no estén en la lista estática
+  // Categorías 100% dinámicas del backend + chip "Todas" fijo al inicio
   const categories = React.useMemo(() => {
-    const staticIds = new Set(STATIC_CATEGORIES.map((c) => c.id));
-    const extra = [...new Set(productDtos.map((p) => p.category))]
-      .filter((cat) => !staticIds.has(cat))
-      .map((cat) => ({ id: cat, name: cat, icon: 'label' as const }));
-    return [...STATIC_CATEGORIES, ...extra];
+    const fromBackend = [...new Set(productDtos.map((p) => p.category))].map((cat) => ({
+      id: cat,
+      name: cat,
+      icon: getIconForCategory(cat),
+    }));
+    return [{ id: 'all', name: 'Todas', icon: 'grid_view' }, ...fromBackend];
   }, [productDtos]);
 
   const flashSaleEndTime = React.useMemo(() => {
@@ -67,16 +101,24 @@ export const HomePage: React.FC = () => {
   }, []);
 
   const handleSearch = (query: string) => console.log('Search:', query);
-  const handleAddToCart = (productId: string) => console.log('Add to cart:', productId);
+
+  const handleAddToCart = (productId: string) => {
+    const product = productDtos.find((p) => p.id === productId);
+    if (product) {
+      dispatch(addItemAction({ product, quantity: 1 }));
+      toast.success(`${product.name} agregado al carrito`);
+    }
+  };
+
   const handleFavorite = (productId: string) => console.log('Favorite:', productId);
 
   return (
     <>
       <Navbar
         user={{ name: 'Ana' }}
-        cartItemCount={1}
+        cartItemCount={cartItemCount}
         onSearch={handleSearch}
-        onCartClick={() => console.log('Cart clicked')}
+        onCartClick={() => navigate('/cart')}
         onWishlistClick={() => console.log('Wishlist clicked')}
         onProfileClick={() => console.log('Profile clicked')}
       />

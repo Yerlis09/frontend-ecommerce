@@ -11,13 +11,41 @@
   .page { padding: 48px 24px 64px; }
 }
 
+/* ── Page header (back btn + title) ── */
+.pageHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #726487;
+  cursor: pointer;
+  transition: color 0.2s;
+  width: fit-content;
+}
+
+.backBtn:hover { color: var(--primary, #6c3ce1); }
+
+:global(.dark) .backBtn { color: #a78bbf; }
+:global(.dark) .backBtn:hover { color: #c4a8e8; }
+
 /* ── Heading ── */
 .heading {
   font-size: 2rem;
   font-weight: 900;
   letter-spacing: -0.02em;
   color: #141117;
-  margin: 0 0 32px;
+  margin: 0;
 }
 
 @media (min-width: 768px) {

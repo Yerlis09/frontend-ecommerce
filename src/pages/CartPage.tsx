@@ -101,9 +101,15 @@ export const CartPage: React.FC = () => {
       />
 
       <main className={styles.page}>
-        <h1 className={styles.heading}>
-          Tu carrito ({totalItems} {totalItems === 1 ? 'producto' : 'productos'})
-        </h1>
+        <div className={styles.pageHeader}>
+          <button className={styles.backBtn} onClick={() => navigate('/')} aria-label="Volver al inicio">
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span>
+            <span>Seguir comprando</span>
+          </button>
+          <h1 className={styles.heading}>
+            Tu carrito ({totalItems} {totalItems === 1 ? 'producto' : 'productos'})
+          </h1>
+        </div>
 
         <div className={styles.layout}>
 
