@@ -1,0 +1,254 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(108, 60, 225, 0.1);
+}
+
+:global(.dark) .navbar {
+  background: rgba(30, 22, 41, 0.8);
+}
+
+.container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem;
+  gap: 1rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.logoIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: #6C3CE1;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 12px -2px rgba(108, 60, 225, 0.3);
+}
+
+.logoText {
+  color: #6C3CE1;
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: -0.025em;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .logoText {
+    display: block;
+  }
+}
+
+.searchContainer {
+  display: none;
+  flex: 1;
+  max-width: 42rem;
+  margin: 0 1rem;
+}
+
+@media (min-width: 768px) {
+  .searchContainer {
+    display: block;
+  }
+}
+
+.searchWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+  transition: color 0.2s;
+}
+
+.searchWrapper:focus-within .searchIcon {
+  color: #6C3CE1;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 3rem;
+  background: #F5F3FF;
+  border: none;
+  border-radius: 1rem;
+  color: #0f172a;
+  transition: all 0.2s;
+}
+
+:global(.dark) .searchInput {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.searchInput:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(108, 60, 225, 0.5);
+}
+
+.searchInput::placeholder {
+  color: #94a3b8;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .actions {
+    gap: 1rem;
+  }
+}
+
+.actionButton {
+  position: relative;
+  padding: 0.75rem;
+  color: #475569;
+  border-radius: 0.75rem;
+  transition: all 0.2s;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+:global(.dark) .actionButton {
+  color: #cbd5e1;
+}
+
+.actionButton:hover {
+  background: rgba(108, 60, 225, 0.1);
+  color: #6C3CE1;
+}
+
+.mobileSearchButton {
+  display: block;
+  padding: 0.5rem;
+  color: #475569;
+  border-radius: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+:global(.dark) .mobileSearchButton {
+  color: #cbd5e1;
+}
+
+.mobileSearchButton:hover {
+  background: rgba(108, 60, 225, 0.1);
+  color: #6C3CE1;
+}
+
+@media (min-width: 768px) {
+  .mobileSearchButton {
+    display: none;
+  }
+}
+
+.cartBadge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  width: 0.625rem;
+  height: 0.625rem;
+  background: #FF6B35;
+  border-radius: 9999px;
+  border: 2px solid white;
+}
+
+:global(.dark) .cartBadge {
+  border-color: #1e1629;
+}
+
+.divider {
+  width: 1px;
+  height: 2rem;
+  background: #e2e8f0;
+  margin: 0 0.25rem;
+}
+
+:global(.dark) .divider {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.profileButton {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.25rem 0.75rem 0.25rem 0.25rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+  background: none;
+  cursor: pointer;
+}
+
+.profileButton:hover {
+  background: #F5F3FF;
+  border-color: #e2e8f0;
+}
+
+:global(.dark) .profileButton:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 9999px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 0 2px rgba(108, 60, 225, 0.2);
+}
+
+.profileName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .profileName {
+    display: block;
+  }
+}

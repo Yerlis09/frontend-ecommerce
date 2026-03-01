@@ -1,0 +1,47 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary, #1a1a2e);
+}
+
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: var(--surface-light, #fff);
+  color: var(--text-primary, #1a1a2e);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: var(--primary, #6c3ce1);
+  box-shadow: 0 0 0 3px rgb(108 60 225 / 12%);
+}
+
+.inputError {
+  border-color: #ef4444;
+}
+
+.inputError:focus {
+  box-shadow: 0 0 0 3px rgb(239 68 68 / 12%);
+}
+
+.error {
+  font-size: 0.8rem;
+  color: #ef4444;
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: #64748b;
+}

@@ -1,0 +1,78 @@
+.container {
+ margin:20px;
+  width: 100%;
+}
+
+.scrollArea {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scrollArea::-webkit-scrollbar {
+  display: none;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  background: white;
+  border: 1px solid #f1f5f9;
+  color: #334155;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+}
+
+:global(.dark) .chip {
+  background: #231b2e;
+  border-color: rgba(255, 255, 255, 0.05);
+  color: #e2e8f0;
+}
+
+.chip:hover {
+  background: #F5F3FF;
+}
+
+:global(.dark) .chip:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chipActive {
+  background: #6C3CE1;
+  border-color: #6C3CE1;
+  color: white;
+  box-shadow: 0 4px 12px -2px rgba(108, 60, 225, 0.25);
+}
+
+:global(.dark) .chipActive {
+  background: #6C3CE1;
+  color: white;
+}
+
+.chipActive:hover {
+  background: #5b2bc4;
+}
+
+.chipIcon {
+  color: #6C3CE1;
+  transition: transform 0.2s;
+}
+
+.chip:hover .chipIcon {
+  transform: scale(1.1);
+}
+
+.chipActive .chipIcon {
+  color: white;
+}

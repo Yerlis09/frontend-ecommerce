@@ -1,0 +1,52 @@
+.stepper {
+  display: flex;
+  align-items: center;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  background: #fff;
+  height: 48px;
+  width: 128px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.btn {
+  width: 40px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #64748b;
+  transition: color 0.2s;
+  font-size: 18px;
+}
+
+.btn:hover:not(:disabled) {
+  color: var(--primary, #6c3ce1);
+}
+
+.btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.value {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #0f172a;
+  user-select: none;
+}
+
+:global(.dark) .stepper {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+:global(.dark) .value {
+  color: #f1f5f9;
+}

@@ -1,0 +1,576 @@
+/* ── Page ── */
+.page {
+  flex: 1;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 16px;
+}
+
+@media (min-width: 768px) {
+  .page { padding: 32px 40px; }
+}
+
+/* ── Breadcrumbs ── */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.875rem;
+  color: #64748b;
+  margin-bottom: 32px;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 8px;
+}
+
+.breadcrumbLink {
+  color: #64748b;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: inherit;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.breadcrumbLink:hover { color: var(--primary, #6c3ce1); }
+
+.breadcrumbSep { color: #cbd5e1; margin: 0 4px; }
+
+.breadcrumbCurrent {
+  color: #0f172a;
+  font-weight: 500;
+}
+
+:global(.dark) .breadcrumbCurrent { color: #f1f5f9; }
+
+/* ── Product Grid ── */
+.productGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .productGrid {
+    grid-template-columns: 7fr 5fr;
+    gap: 48px;
+  }
+}
+
+/* ── Image Section ── */
+.imageSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mainImageWrapper {
+  position: relative;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  border: 1px solid #f1f5f9;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 6%);
+}
+
+:global(.dark) .mainImageWrapper {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.mainImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.mainImageWrapper:hover .mainImage {
+  transform: scale(1.05);
+}
+
+.thumbnailGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.thumb {
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 1;
+  border: 1.5px solid #e2e8f0;
+  cursor: pointer;
+  background: #fff;
+  padding: 0;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.thumb:hover { border-color: var(--primary, #6c3ce1); }
+
+.thumbActive {
+  border: 2px solid var(--primary, #6c3ce1);
+  box-shadow: 0 0 0 3px rgb(108 60 225 / 15%);
+}
+
+.thumbImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+:global(.dark) .thumb {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+/* ── Info Section ── */
+.infoSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.infoHeader {
+  margin-bottom: 24px;
+}
+
+.categoryTag {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary, #6c3ce1);
+  margin-bottom: 8px;
+}
+
+.productName {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+  margin: 0 0 12px;
+}
+
+@media (min-width: 768px) {
+  .productName { font-size: 2.25rem; }
+}
+
+:global(.dark) .productName { color: #f8fafc; }
+
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.stars {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.ratingValue {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+:global(.dark) .ratingValue { color: #e2e8f0; }
+
+/* ── Price Panel ── */
+.pricePanel {
+  background: #fff;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgb(0 0 0 / 6%);
+  margin-bottom: 32px;
+}
+
+:global(.dark) .pricePanel {
+  background: rgb(30 41 59 / 50%);
+  border-color: #334155;
+}
+
+.priceValue {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary, #6c3ce1);
+  margin-bottom: 16px;
+  line-height: 1;
+}
+
+/* ── Stock Badge ── */
+.stockBadge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 10px;
+  padding: 8px 12px;
+  color: #92400e;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.stockOut {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #991b1b;
+}
+
+:global(.dark) .stockBadge {
+  background: rgb(120 53 15 / 20%);
+  border-color: rgb(251 191 36 / 30%);
+  color: #fbbf24;
+}
+
+/* ── Actions ── */
+.actionsRow {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 640px) {
+  .actionsRow {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.btnPrimary {
+  flex: 1;
+  height: 48px;
+  background: var(--primary, #6c3ce1);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgb(108 60 225 / 25%);
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.btnPrimary:hover:not(:disabled) {
+  background: #5a2ec2;
+  box-shadow: 0 6px 20px rgb(108 60 225 / 35%);
+}
+
+.btnPrimary:active:not(:disabled) { transform: scale(0.98); }
+
+.btnPrimary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.btnOutline {
+  width: 100%;
+  height: 48px;
+  background: transparent;
+  color: var(--primary, #6c3ce1);
+  border: 2px solid var(--primary, #6c3ce1);
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background 0.2s;
+  margin-bottom: 16px;
+}
+
+.btnOutline:hover:not(:disabled) {
+  background: rgb(108 60 225 / 6%);
+}
+
+.btnOutline:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Trust Signal ── */
+.trustSignal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
+}
+
+:global(.dark) .trustSignal { border-top-color: #334155; }
+
+.trustLabel {
+  font-size: 0.75rem;
+  color: #64748b;
+}
+
+.wompiChip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  font-size: 0.75rem;
+  background: #f1f5f9;
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: #1e293b;
+}
+
+:global(.dark) .wompiChip {
+  background: #334155;
+  color: #f1f5f9;
+}
+
+/* ── Accordions ── */
+.accordions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.accordion {
+  background: #fff;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+:global(.dark) .accordion {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.accordionSummary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: #0f172a;
+  list-style: none;
+  transition: background 0.15s;
+}
+
+.accordionSummary:hover { background: #f8fafc; }
+.accordionSummary::-webkit-details-marker { display: none; }
+.accordionSummary::marker { display: none; }
+
+:global(.dark) .accordionSummary { color: #f1f5f9; }
+:global(.dark) .accordionSummary:hover { background: rgb(51 65 85 / 50%); }
+
+.accordionChevron {
+  font-size: 20px;
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.accordion[open] .accordionChevron {
+  transform: rotate(180deg);
+}
+
+.accordionBody {
+  padding: 0 16px 16px;
+  font-size: 0.875rem;
+  color: #475569;
+  line-height: 1.7;
+}
+
+:global(.dark) .accordionBody { color: #94a3b8; }
+
+/* ── Similar Products ── */
+.similarSection {
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid #e2e8f0;
+}
+
+:global(.dark) .similarSection { border-top-color: #334155; }
+
+.similarTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 24px;
+}
+
+:global(.dark) .similarTitle { color: #f8fafc; }
+
+.similarGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .similarGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .similarGrid { grid-template-columns: repeat(4, 1fr); }
+}
+
+.similarCard {
+  background: #fff;
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+
+.similarCard:hover {
+  box-shadow: 0 8px 24px rgb(0 0 0 / 10%);
+  transform: translateY(-3px);
+}
+
+:global(.dark) .similarCard {
+  background: #1e293b;
+  border-color: #334155;
+}
+
+.similarImgWrapper {
+  overflow: hidden;
+  background: #f8fafc;
+  position: relative;
+}
+
+:global(.dark) .similarImgWrapper { background: #0f172a; }
+
+.similarImg {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.similarCard:hover .similarImg { transform: scale(1.08); }
+
+.similarBody {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.similarName {
+  font-weight: 500;
+  color: #0f172a;
+  margin: 0 0 4px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+:global(.dark) .similarName { color: #f1f5f9; }
+
+.similarCategory {
+  font-size: 0.8rem;
+  color: #64748b;
+  margin: 0 0 12px;
+  text-transform: capitalize;
+}
+
+.similarFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+
+.similarPrice {
+  font-weight: 700;
+  color: #0f172a;
+  font-size: 0.9rem;
+}
+
+:global(.dark) .similarPrice { color: #f1f5f9; }
+
+.similarBtn {
+  font-size: 0.8rem;
+  color: var(--primary, #6c3ce1);
+  font-weight: 600;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.2s;
+}
+
+.similarBtn:hover { opacity: 0.7; }
+
+/* ── Error State ── */
+.errorState {
+  text-align: center;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.errorState h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+.errorState p {
+  color: #64748b;
+  margin: 0 0 16px;
+}
+
+:global(.dark) .errorState h2 { color: #f1f5f9; }
+
+/* ── Loading skeleton grid ── */
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .skeletonGrid {
+    grid-template-columns: 7fr 5fr;
+    gap: 48px;
+  }
+}
+
+.skeletonThumbs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.skeletonPanel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
