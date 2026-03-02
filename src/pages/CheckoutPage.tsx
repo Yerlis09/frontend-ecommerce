@@ -49,6 +49,7 @@ interface FormData {
   department: string;
   city:       string;
   address:    string;
+  postalCode: string;
   notes:      string;
 }
 
@@ -57,11 +58,11 @@ type LookupStatus = 'idle' | 'searching' | 'found' | 'not-found' | 'error';
 const initialForm: FormData = {
   email: '', firstName: '', lastName: '', phone: '',
   docType: 'CC', docNumber: '',
-  department: '', city: '', address: '', notes: '',
+  department: '', city: '', address: '', postalCode: '', notes: '',
 };
 
 const requiredFields: (keyof FormData)[] = [
-  'email', 'firstName', 'lastName', 'phone', 'docNumber', 'department', 'city', 'address',
+  'email', 'firstName', 'lastName', 'phone', 'docNumber', 'department', 'city', 'address', 'postalCode',
 ];
 
 // ── Component ────────────────────────────────────────────────────────────────
@@ -165,6 +166,7 @@ export const CheckoutPage: React.FC = () => {
         lastName,
         phone:      customer.phone,
         address:    customer.address,
+        postalCode: customer.postalCode ?? '',
         department: dept,
         city:       dept ? customer.city : '',
       }));
@@ -172,6 +174,7 @@ export const CheckoutPage: React.FC = () => {
       setTouched((prev) => ({
         ...prev,
         firstName: true, lastName: true, phone: true, address: true,
+        ...(customer.postalCode ? { postalCode: true } : {}),
         ...(dept ? { department: true, city: true } : {}),
       }));
       setLookupStatus('found');
@@ -201,31 +204,38 @@ export const CheckoutPage: React.FC = () => {
     try {
       let customerId = existingCustomerId;
 
+      const phone = form.phone.trim().startsWith('+')
+        ? form.phone.trim()
+        : `+57${form.phone.trim()}`;
+
       if (!customerId) {
         // New customer → create in the API
         const created = await customersService.create({
-          email:    form.email.trim(),
-          fullName: `${form.firstName.trim()} ${form.lastName.trim()}`,
-          phone:    form.phone.trim(),
-          address:  form.address.trim(),
-          city:     form.city,
-          country:  'Colombia',
+          email:      form.email.trim(),
+          fullName:   `${form.firstName.trim()} ${form.lastName.trim()}`,
+          phone,
+          address:    form.address.trim(),
+          city:       form.city,
+          country:    'CO',
+          postalCode: form.postalCode.trim(),
         });
         customerId = created.id;
         toast.success('Datos guardados correctamente');
       }
 
-      // Navigate to payment, passing customer data as route state
+      // Navigate to payment, passing customer data + shipping cost as route state
       navigate('/payment', {
         state: {
           customerId,
+          shippingCost,
           customerData: {
-            email:    form.email.trim(),
-            fullName: `${form.firstName.trim()} ${form.lastName.trim()}`,
-            phone:    form.phone.trim(),
-            address:  form.address.trim(),
-            city:     form.city,
-            country:  'Colombia',
+            email:      form.email.trim(),
+            fullName:   `${form.firstName.trim()} ${form.lastName.trim()}`,
+            phone,
+            address:    form.address.trim(),
+            city:       form.city,
+            country:    'CO',
+            postalCode: form.postalCode.trim(),
           },
         },
       });
@@ -532,6 +542,24 @@ export const CheckoutPage: React.FC = () => {
                       <ValidIcon show={!!form.address.trim() && !hasError('address')} />
                     </div>
                     {hasError('address') && <span className={styles.errorMsg}>La dirección es requerida</span>}
+                  </div>
+
+                  {/* Postal code */}
+                  <div className={styles.fieldGroup}>
+                    <label className={styles.label} htmlFor="postalCode">
+                      Código Postal <span className={styles.required}>*</span>
+                    </label>
+                    <div className={styles.inputWrapper}>
+                      <input
+                        id="postalCode" type="text" inputMode="numeric"
+                        className={`${styles.input} ${hasError('postalCode') ? styles.inputError : ''}`}
+                        placeholder="110111"
+                        value={form.postalCode} onChange={set('postalCode')} onBlur={blur('postalCode')}
+                        maxLength={6} disabled={isSubmitting}
+                      />
+                      <ValidIcon show={!!form.postalCode.trim() && !hasError('postalCode')} />
+                    </div>
+                    {hasError('postalCode') && <span className={styles.errorMsg}>El código postal es requerido</span>}
                   </div>
 
                   {/* Notes */}

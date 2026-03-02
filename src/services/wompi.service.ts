@@ -1,15 +1,6 @@
-import httpClient from './http.client';
+import { WOMPI_PUBLIC_KEY } from '../config/wompi.config';
 
-export interface WompiAcceptanceTokensResponse {
-  acceptanceToken: string;
-  acceptPersonalAuth: string;
-  permalinks: {
-    termsAndConditions: string;
-    privacyPolicy: string;
-  };
-}
-
-export interface WompiCardData {
+interface TokenizeCardParams {
   number: string;
   cvc: string;
   exp_month: string;
@@ -17,22 +8,51 @@ export interface WompiCardData {
   card_holder: string;
 }
 
-export const wompiService = {
-  getAcceptanceTokens: () =>
-    httpClient
-      .get<WompiAcceptanceTokensResponse>('/wompi/acceptance-tokens')
-      .then((r) => r.data),
+class WompiService {
+  private readonly publicKey: string;
+  private readonly apiUrl: string;
+  readonly isSandbox: boolean;
 
-  /**
-   * La tokenización se hace desde el frontend con el SDK de Wompi.
-   * Este método es un helper que llama al SDK global `window.Wompi`.
-   */
-  tokenizeCard: async (cardData: WompiCardData, publicKey: string): Promise<string> => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const response = await (window as any).Wompi.tokenizeCard({
-      ...cardData,
-      publicKey,
+  constructor() {
+    this.publicKey = WOMPI_PUBLIC_KEY;
+
+    if (this.publicKey.startsWith('pub_stagtest_')) {
+      this.apiUrl = 'https://api-sandbox.co.uat.wompi.dev/v1';
+      this.isSandbox = true;
+    } else if (this.publicKey.startsWith('pub_test_')) {
+      this.apiUrl = 'https://sandbox.wompi.co/v1';
+      this.isSandbox = true;
+    } else {
+      this.apiUrl = 'https://production.wompi.co/v1';
+      this.isSandbox = false;
+    }
+  }
+
+  async tokenizeCard(cardData: TokenizeCardParams): Promise<string> {
+    const response = await fetch(`${this.apiUrl}/tokens/cards`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.publicKey}`,
+      },
+      body: JSON.stringify({
+        number:      cardData.number.replace(/\s/g, ''),
+        cvc:         cardData.cvc,
+        exp_month:   cardData.exp_month,
+        exp_year:    cardData.exp_year,
+        card_holder: cardData.card_holder,
+      }),
     });
-    return response.id as string;
-  },
-};
+
+    if (!response.ok) {
+      const body = await response.json().catch(() => ({})) as Record<string, unknown>;
+      const reason = (body?.error as Record<string, unknown>)?.reason ?? `HTTP ${response.status}`;
+      throw new Error(`No se pudo tokenizar la tarjeta: ${reason}`);
+    }
+
+    const body = await response.json() as { data: { id: string } };
+    return body.data.id;
+  }
+}
+
+export const wompiService = new WompiService();

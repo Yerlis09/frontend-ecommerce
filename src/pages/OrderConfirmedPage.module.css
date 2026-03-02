@@ -1,0 +1,441 @@
+/* ── Toast ─────────────────────────────────────────────────────────────────── */
+.toast {
+  position: fixed;
+  top: 88px;
+  right: 24px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid #f1f5f9;
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 8px 32px rgb(0 0 0 / 12%);
+  animation: slideIn 0.3s ease;
+  max-width: 320px;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.toastTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+}
+
+.toastSub {
+  font-size: 0.75rem;
+  color: #64748b;
+  margin: 2px 0 0;
+}
+
+.toastClose {
+  background: none;
+  border: none;
+  color: #94a3b8;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 8px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+}
+
+.toastClose:hover { color: #475569; }
+
+/* ── Page ───────────────────────────────────────────────────────────────────── */
+.page {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px 80px;
+}
+
+/* ── Container ──────────────────────────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── Success header ─────────────────────────────────────────────────────────── */
+.successHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  padding-bottom: 8px;
+}
+
+.iconRing {
+  padding: 20px;
+  border-radius: 50%;
+}
+
+.iconCircle {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .title { font-size: 1.75rem; }
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #64748b;
+  margin: 0;
+}
+
+.refBold {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* ── Card base ──────────────────────────────────────────────────────────────── */
+.card {
+  width: 100%;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 4%);
+}
+
+/* ── Card header ────────────────────────────────────────────────────────────── */
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f8fafc;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 16px 24px;
+}
+
+.cardTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
+
+/* ── Status badge ───────────────────────────────────────────────────────────── */
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  border: 1px solid transparent;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.badgeApproved {
+  background: #dcfce7;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+.badgeApproved .statusDot { background: #22c55e; }
+
+.badgePending {
+  background: #fef9c3;
+  color: #a16207;
+  border-color: #fde68a;
+}
+.badgePending .statusDot { background: #eab308; }
+
+.badgeDeclined {
+  background: #fee2e2;
+  color: #dc2626;
+  border-color: #fecaca;
+}
+.badgeDeclined .statusDot { background: #ef4444; }
+
+/* ── Details grid ───────────────────────────────────────────────────────────── */
+.detailsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 8px 0;
+}
+
+@media (max-width: 560px) {
+  .detailsGrid { grid-template-columns: 1fr; }
+}
+
+.detailCell {
+  padding: 20px 28px;
+  border-right: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.detailCell:nth-child(2n) { border-right: none; }
+.detailCell:nth-last-child(-n+2) { border-bottom: none; }
+
+@media (max-width: 560px) {
+  .detailCell { border-right: none; }
+  .detailCell:last-child { border-bottom: none; }
+}
+
+.detailLabel {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 4px;
+}
+
+.detailValue {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0;
+  word-break: break-all;
+}
+
+.mono { font-family: 'Courier New', monospace; font-size: 0.82rem; }
+
+.amount {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+/* ── Delivery info row ──────────────────────────────────────────────────────── */
+.infoRow {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .infoRow { flex-direction: column; }
+}
+
+/* Delivery card */
+.deliveryCard {
+  flex: 1;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 4%);
+}
+
+.deliveryIconBox {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(126, 58, 228, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.infoLabel {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+  margin: 0 0 4px;
+}
+
+.deliveryDate {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 4px;
+}
+
+.infoSub {
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* Summary card */
+.summaryCard {
+  flex: 1;
+  background: linear-gradient(135deg, rgba(126,58,228,0.05) 0%, rgba(126,58,228,0.10) 100%);
+  border: 1px solid rgba(126, 58, 228, 0.15);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  overflow: hidden;
+  position: relative;
+}
+
+.summaryItems {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 4px;
+}
+
+.summaryTotal {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #7e3ae4;
+  margin: 0;
+}
+
+/* ── Actions ────────────────────────────────────────────────────────────────── */
+.actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.btnPrimary {
+  flex: 1;
+  min-width: 140px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #7e3ae4;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgb(126 58 228 / 30%);
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+
+.btnPrimary:hover {
+  background: #6d28d9;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgb(126 58 228 / 40%);
+}
+
+.btnSecondary {
+  flex: 1;
+  min-width: 140px;
+  height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  color: #374151;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.btnSecondary:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* ── Countdown redirect ─────────────────────────────────────────────────────── */
+.countdown {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.countdownText {
+  font-size: 0.8125rem;
+  color: #64748b;
+  margin: 0;
+  text-align: center;
+}
+
+.countdownText strong {
+  color: #7e3ae4;
+  font-weight: 700;
+}
+
+.countdownTrack {
+  width: 100%;
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.countdownFill {
+  height: 100%;
+  background: #7e3ae4;
+  border-radius: 999px;
+  transition: width 1s linear;
+}
+
+/* ── Help link ──────────────────────────────────────────────────────────────── */
+.helpLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  color: #94a3b8;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.helpLink:hover { color: #7e3ae4; }
+
+/* ── Empty state ────────────────────────────────────────────────────────────── */
+.emptyState {
+  text-align: center;
+  padding: 80px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.emptyTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+}
