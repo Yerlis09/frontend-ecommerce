@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { type HeroBannerProps } from '../../types/product.types';
 import styles from './HeroBanner.module.css';
 
@@ -14,7 +14,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
   highlight,
   ctaText,
   onCtaClick,
-  imageUrl = 'https://lh3.googleusercontent.com/aida-public/AB6AXuCUCRZSCiQVoqnBn44yx0KZlLIBeopTYeX0Up7148pLX9B6IgA0d4ofYkezSphn97NhUpqemjwH8u-QLfWxF9odWHmX-aF7PFLyCnYx-S7-zYjBSTF4sOLOur8S3MsH8SdSRz_nyg6OOY1BNKLw6CQVq0AADAVU8p17Nm96pI-SDQvKrkTUpQrymOIC2gObiy_our7tsL65ciNW6zM5ae-dRjZdaiQTpqvvGrK8mpLe8gX7vDIcA4vvYV_8BJooLrDEFkv377CeEilY',
+  imageUrl = 'https://bk-products-img.s3.us-east-2.amazonaws.com/diademas/diademas+(1).png',
   endTime,
 }) => {
   const [timeLeft, setTimeLeft] = useState<TimeLeft>({ hours: 0, minutes: 0, seconds: 0 });

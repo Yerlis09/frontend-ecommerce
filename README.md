@@ -1,6 +1,15 @@
 # ShopWave — Frontend E-commerce
 
-Aplicación web de comercio electrónico construida con React 19, TypeScript y Vite. Integra la pasarela de pagos **Wompi** para Colombia y consume una API REST de NestJS desplegada en AWS.
+Aplicación web de comercio electrónico construida con **React 19**, **TypeScript** y **Vite**. Integra la pasarela de pagos **Wompi** para Colombia y consume una API REST de NestJS desplegada en AWS EC2.
+
+---
+
+## Demo en Vivo
+
+| Entorno | URL |
+|---------|-----|
+| **Frontend** | [https://shopwave.space](https://shopwave.space) |
+| **Backend API** | [https://eco.dev.testbydevelopment.space](https://eco.dev.testbydevelopment.space) |
 
 ---
 
@@ -23,14 +32,19 @@ Aplicación web de comercio electrónico construida con React 19, TypeScript y V
 
 ## Descripción General
 
-ShopWave es una SPA (Single Page Application) de e-commerce que permite a los usuarios:
+**ShopWave** es una SPA (Single Page Application) de e-commerce full-stack orientada al mercado colombiano. Permite a los usuarios comprar productos de forma segura a través de la pasarela de pagos **Wompi**, con un flujo de compra completo end-to-end.
 
-- Explorar un catálogo de productos con filtros por categoría
-- Ver el detalle de cada producto
-- Gestionar un carrito de compras persistente en `localStorage`
-- Completar un proceso de checkout en 3 pasos: datos personales → pago → confirmación
-- Pagar con tarjeta de crédito/débito mediante Wompi
-- Consultar el historial de pedidos por correo electrónico
+### Funcionalidades principales
+
+- Explorar un catálogo de productos con **búsqueda en tiempo real** y filtros por categoría
+- Ver el **detalle de cada producto** con galería de imágenes y selector de cantidad
+- Gestionar un **carrito de compras persistente** en `localStorage` (sobrevive recargas)
+- Aplicar **códigos de descuento** con validación contra el backend
+- Completar un **checkout en 3 pasos**: datos personales → pago con tarjeta → confirmación
+- **Tokenización de tarjetas** del lado del cliente con Wompi (los datos nunca pasan por el backend propio)
+- Visualización animada de la tarjeta de crédito con `react-credit-cards-2`
+- Consultar el **historial de pedidos** por correo electrónico
+- Redireccionamiento automático a inicio tras confirmación de compra (60 segundos)
 
 ---
 
@@ -400,7 +414,10 @@ Crea un archivo `.env` en la raíz basándote en `.env.example`:
 
 ```env
 # URL del backend NestJS (sin trailing slash)
+# Desarrollo local:
 VITE_API_URL=http://localhost:3000
+# Producción:
+# VITE_API_URL=https://eco.dev.testbydevelopment.space
 
 # Llave pública de Wompi
 # Staging:     pub_stagtest_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
@@ -539,7 +556,7 @@ cd frontend-ecommerce
 
 # Crear las variables de entorno de producción
 cat > .env << 'EOF'
-VITE_API_URL=http://<IP-O-DOMINIO-DEL-BACKEND>:3000
+VITE_API_URL=https://eco.dev.testbydevelopment.space
 VITE_WOMPI_PUBLIC_KEY=pub_prod_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 EOF
 
@@ -584,7 +601,7 @@ sudo nano /etc/nginx/sites-available/shopwave
 ```nginx
 server {
     listen 80;
-    server_name <IP-PUBLICA-EC2>;   # o tu dominio: shopwave.ejemplo.com
+    server_name shopwave.space www.shopwave.space;
 
     root /var/www/shopwave;
     index index.html;
@@ -656,7 +673,7 @@ Requiere que tengas un dominio apuntando a la IP pública de la EC2.
 sudo apt install -y certbot python3-certbot-nginx
 
 # Obtener el certificado SSL
-sudo certbot --nginx -d shopwave.ejemplo.com
+sudo certbot --nginx -d shopwave.space -d www.shopwave.space
 
 # Certbot modifica automáticamente la configuración de Nginx
 # y configura la renovación automática
@@ -712,7 +729,7 @@ chmod +x /home/ubuntu/deploy.sh
 sudo systemctl status nginx
 
 # Verificar que responde
-curl -I http://<IP-PUBLICA-EC2>
+curl -I https://shopwave.space
 # Esperado: HTTP/1.1 200 OK
 
 # Logs en tiempo real

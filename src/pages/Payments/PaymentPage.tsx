@@ -356,12 +356,7 @@ export const PaymentPage: React.FC = () => {
                           value={cardForm.installments}
                           onChange={setCard('installments')}
                         >
-                          <option value="1">1 Cuota (Sin interés)</option>
-                          <option value="3">3 Cuotas</option>
-                          <option value="6">6 Cuotas</option>
-                          <option value="12">12 Cuotas</option>
-                          <option value="24">24 Cuotas</option>
-                          <option value="36">36 Cuotas</option>
+                          <option value="1">1 Cuota</option>
                         </select>
                         <span className="material-symbols-outlined" style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: '#64748b', pointerEvents: 'none' }}>
                           expand_more

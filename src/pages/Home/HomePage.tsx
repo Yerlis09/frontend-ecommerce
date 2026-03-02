@@ -165,13 +165,134 @@ export const HomePage: React.FC = () => {
         {!isLoading && !isError && (
           <ProductGrid
             products={filtered}
-            title={`Featured Products${filtered.length > 0 ? ` (${filtered.length})` : ''}`}
-            onViewAll={() => console.log('View all')}
+            title={`Productos${filtered.length > 0 ? ` (${filtered.length})` : ''}`}
+            onViewAll={() => {}}
             onNavigate={(id) => navigate(`/product/${id}`)}
             onAddToCart={handleAddToCart}
             onFavorite={handleFavorite}
           />
         )}
+
+        {/* ── Benefits bar ── */}
+        <section style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+          gap: '16px',
+        }}>
+          {[
+            { icon: 'local_shipping', title: 'Envío rápido',       desc: 'Entrega en 24–48 h a todo el país' },
+            { icon: 'autorenew',      title: 'Devoluciones fáciles', desc: '30 días para cambios sin costo'    },
+            { icon: 'verified_user',  title: 'Pago seguro',         desc: 'Encriptación SSL 256 bits con Wompi' },
+            { icon: 'support_agent',  title: 'Soporte 24/7',        desc: 'Equipo listo para ayudarte siempre' },
+          ].map(({ icon, title, desc }) => (
+            <div key={title} style={{
+              display: 'flex', alignItems: 'flex-start', gap: '14px',
+              background: '#fff', borderRadius: '16px',
+              padding: '20px', border: '1px solid #f1f5f9',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.04)',
+            }}>
+              <div style={{
+                width: '44px', height: '44px', borderRadius: '12px',
+                background: 'rgba(108,60,225,0.1)', display: 'flex',
+                alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+              }}>
+                <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#6C3CE1' }}>{icon}</span>
+              </div>
+              <div>
+                <p style={{ fontWeight: 700, fontSize: '0.9rem', color: '#0f172a', marginBottom: '4px' }}>{title}</p>
+                <p style={{ fontSize: '0.8rem', color: '#64748b', lineHeight: 1.4 }}>{desc}</p>
+              </div>
+            </div>
+          ))}
+        </section>
+
+        {/* ── CTA Banner ── */}
+        <section style={{
+          background: 'linear-gradient(135deg, #6C3CE1 0%, #a855f7 100%)',
+          borderRadius: '24px',
+          padding: '48px 40px',
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '24px',
+          position: 'relative',
+          overflow: 'hidden',
+        }}>
+          {/* decorative circles */}
+          <div style={{ position: 'absolute', top: '-40px', right: '-40px', width: '200px', height: '200px', borderRadius: '50%', background: 'rgba(255,255,255,0.08)' }} />
+          <div style={{ position: 'absolute', bottom: '-60px', right: '120px', width: '150px', height: '150px', borderRadius: '50%', background: 'rgba(255,255,255,0.06)' }} />
+
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '0.875rem', fontWeight: 600, marginBottom: '8px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+              Oferta de temporada
+            </p>
+            <h2 style={{ color: '#fff', fontSize: 'clamp(1.5rem, 3vw, 2.25rem)', fontWeight: 900, lineHeight: 1.2, margin: 0 }}>
+              ¡Hasta 50% de descuento<br />en productos seleccionados!
+            </h2>
+            <p style={{ color: 'rgba(255,255,255,0.8)', marginTop: '12px', fontSize: '0.95rem' }}>
+              Aprovecha los mejores precios solo por tiempo limitado.
+            </p>
+          </div>
+
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            style={{
+              position: 'relative', zIndex: 1,
+              background: '#fff', color: '#6C3CE1',
+              border: 'none', borderRadius: '14px',
+              padding: '14px 28px', fontWeight: 800,
+              fontSize: '0.95rem', cursor: 'pointer',
+              boxShadow: '0 4px 16px rgba(0,0,0,0.15)',
+              display: 'flex', alignItems: 'center', gap: '8px',
+              flexShrink: 0,
+              transition: 'transform 0.15s, box-shadow 0.15s',
+            }}
+            onMouseEnter={(e) => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(0,0,0,0.2)'; }}
+            onMouseLeave={(e) => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)'; }}
+          >
+            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>shopping_bag</span>
+            Comprar ahora
+          </button>
+        </section>
+
+        {/* ── Newsletter ── */}
+        <section style={{
+          background: '#f8faff',
+          borderRadius: '24px',
+          padding: '40px',
+          textAlign: 'center',
+          border: '1px solid #e8eaf6',
+        }}>
+          <span className="material-symbols-outlined" style={{ fontSize: '36px', color: '#6C3CE1' }}>mail</span>
+          <h3 style={{ margin: '12px 0 6px', fontWeight: 800, fontSize: '1.4rem', color: '#0f172a' }}>
+            Suscríbete y ahorra
+          </h3>
+          <p style={{ color: '#64748b', marginBottom: '24px', fontSize: '0.95rem' }}>
+            Recibe ofertas exclusivas, novedades y descuentos directamente en tu correo.
+          </p>
+          <div style={{ display: 'flex', gap: '10px', maxWidth: '460px', margin: '0 auto' }}>
+            <input
+              type="email"
+              placeholder="tucorreo@ejemplo.com"
+              style={{
+                flex: 1, padding: '12px 16px', borderRadius: '12px',
+                border: '1.5px solid #e2e8f0', fontSize: '0.9rem',
+                outline: 'none', background: '#fff', color: '#0f172a',
+              }}
+              onFocus={(e) => { e.currentTarget.style.borderColor = '#6C3CE1'; }}
+              onBlur={(e) => { e.currentTarget.style.borderColor = '#e2e8f0'; }}
+            />
+            <button style={{
+              background: '#6C3CE1', color: '#fff', border: 'none',
+              borderRadius: '12px', padding: '12px 20px', fontWeight: 700,
+              fontSize: '0.9rem', cursor: 'pointer', whiteSpace: 'nowrap',
+            }}>
+              Suscribirme
+            </button>
+          </div>
+        </section>
+
       </main>
 
       <Footer />

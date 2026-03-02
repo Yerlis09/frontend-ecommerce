@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { type NavbarProps } from './Navbar.types';
 import styles from './Navbar.module.css';
 
@@ -20,12 +21,12 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className={styles.container}>
         <div className={styles.content}>
           {/* Logo */}
-          <div className={styles.logo}>
+          <Link to="/" className={styles.logo}>
             <div className={styles.logoIcon}>
               <span className="material-symbols-outlined">bolt</span>
             </div>
             <h1 className={styles.logoText}>ShopWave</h1>
-          </div>
+          </Link>
 
           {/* Search Bar */}
           <div className={styles.searchContainer}>
