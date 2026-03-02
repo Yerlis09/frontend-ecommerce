@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import type { RootState, AppDispatch } from '../store/store';
-import { clearCart } from '../store/cartSlice';
-import { Navbar } from '../shared/components/layout/Navbar/Navbar';
-import { Footer } from '../shared/components/layout/Footer/Footer';
-import { formatCOP, fromCents } from '../shared/utils/currency';
-import type { PaymentResponseDto } from '../services/payments.service';
+import { useLocation, useNavigate } from 'react-router-dom';
+import type { PaymentResponseDto } from '../../../services/payments.service';
+import { Footer } from '../../../shared/components/layout/Footer/Footer';
+import { Navbar } from '../../../shared/components/layout/Navbar/Navbar';
+import { formatCOP, fromCents } from '../../../shared/utils/currency';
+import { clearCart } from '../../../store/cartSlice';
+import type { AppDispatch, RootState } from '../../../store/store';
 import styles from './OrderConfirmedPage.module.css';
 
 interface RouteState {

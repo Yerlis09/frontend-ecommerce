@@ -1,16 +1,16 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem as addItemAction } from '../store/cartSlice';
-import type { AppDispatch, RootState } from '../store/store';
-import { Navbar } from '../shared/components/layout/Navbar/Navbar';
-import { Footer } from '../shared/components/layout/Footer/Footer';
-import { HeroBanner, CategoryChips, ProductGrid } from '../features/catalog';
-import { useProducts } from '../features/catalog/hooks/useProducts';
-import { useFilters } from '../features/catalog/hooks/useFilters';
-import { mapProductDto } from '../features/catalog/utils/mapProduct';
-import { Skeleton } from '../shared/components/ui/Skeleton/Skeleton';
-import { useToast } from '../shared/hooks/useToast';
+import { useNavigate } from 'react-router-dom';
+import { CategoryChips, HeroBanner, ProductGrid } from '../../features/catalog';
+import { useFilters } from '../../features/catalog/hooks/useFilters';
+import { useProducts } from '../../features/catalog/hooks/useProducts';
+import { mapProductDto } from '../../features/catalog/utils/mapProduct';
+import { Footer } from '../../shared/components/layout/Footer/Footer';
+import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
+import { Skeleton } from '../../shared/components/ui/Skeleton/Skeleton';
+import { useToast } from '../../shared/hooks/useToast';
+import { addItem as addItemAction } from '../../store/cartSlice';
+import type { AppDispatch, RootState } from '../../store/store';
 /** Mapeo de palabras clave (sin tildes, minúsculas) → icono de Material Symbols */
 const ICON_MAP: [string, string][] = [
   ['electronic', 'devices'],   ['electronica', 'devices'],  ['tech', 'devices'],

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useCart } from '../features/cart/hooks/useCart';
-import { discountCodesService } from '../services/discount-codes.service';
-import { Navbar } from '../shared/components/layout/Navbar/Navbar';
-import { Footer } from '../shared/components/layout/Footer/Footer';
-import { formatCOP } from '../shared/utils/currency';
+import { useCart } from '../../features/cart/hooks/useCart';
+import { discountCodesService } from '../../services/discount-codes.service';
+import { Footer } from '../../shared/components/layout/Footer/Footer';
+import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
+import { formatCOP } from '../../shared/utils/currency';
 import styles from './CartPage.module.css';
 
 // Matches BASE_FEE in useCart.ts

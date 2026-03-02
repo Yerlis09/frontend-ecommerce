@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useProductDetail } from '../features/product-detail/hooks/useProductDetail';
-import { useProducts } from '../features/catalog/hooks/useProducts';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItem as addItemAction } from '../store/cartSlice';
-import type { RootState, AppDispatch } from '../store/store';
-import { Navbar } from '../shared/components/layout/Navbar/Navbar';
-import { Footer } from '../shared/components/layout/Footer/Footer';
-import { Skeleton } from '../shared/components/ui/Skeleton/Skeleton';
-import { QuantityStepper } from '../features/product-detail/components/QuantityStepper/QuantityStepper';
-import { formatCOP } from '../shared/utils/currency';
-import { useToast } from '../shared/hooks/useToast';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useProducts } from '../../features/catalog/hooks/useProducts';
+import { QuantityStepper } from '../../features/product-detail/components/QuantityStepper/QuantityStepper';
+import { useProductDetail } from '../../features/product-detail/hooks/useProductDetail';
+import { Footer } from '../../shared/components/layout/Footer/Footer';
+import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
+import { Skeleton } from '../../shared/components/ui/Skeleton/Skeleton';
+import { useToast } from '../../shared/hooks/useToast';
+import { formatCOP } from '../../shared/utils/currency';
+import { addItem as addItemAction } from '../../store/cartSlice';
+import type { AppDispatch, RootState } from '../../store/store';
 import styles from './ProductDetailPage.module.css';
 
 // ── Star Rating ──────────────────────────────────────────────────────────────

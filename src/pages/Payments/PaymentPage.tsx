@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
 import Cards from 'react-credit-cards-2';
 import 'react-credit-cards-2/dist/es/styles-compiled.css';
-import type { RootState } from '../store/store';
-import { useCart } from '../features/cart/hooks/useCart';
-import { paymentsService } from '../services/payments.service';
-import { wompiService } from '../services/wompi.service';
-import type { CustomerDto } from '../services/customers.service';
-import type { ApiError } from '../shared/types/api.types';
-import { useToast } from '../shared/hooks/useToast';
-import { Navbar } from '../shared/components/layout/Navbar/Navbar';
-import { Footer } from '../shared/components/layout/Footer/Footer';
-import { formatCOP } from '../shared/utils/currency';
-import type { PaymentResponseDto } from '../services/payments.service';
+import { useSelector } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useCart } from '../../features/cart/hooks/useCart';
+import type { CustomerDto } from '../../services/customers.service';
+import type { PaymentResponseDto } from '../../services/payments.service';
+import { paymentsService } from '../../services/payments.service';
+import { wompiService } from '../../services/wompi.service';
+import { Footer } from '../../shared/components/layout/Footer/Footer';
+import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
+import { useToast } from '../../shared/hooks/useToast';
+import type { ApiError } from '../../shared/types/api.types';
+import { formatCOP } from '../../shared/utils/currency';
+import type { RootState } from '../../store/store';
 import styles from './PaymentPage.module.css';
 
 // ── Types ────────────────────────────────────────────────────────────────────
