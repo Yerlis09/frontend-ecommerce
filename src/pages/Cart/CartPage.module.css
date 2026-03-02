@@ -97,7 +97,6 @@
 
 .couponCard {
   padding: 24px;
-  overflow: visible;
 }
 
 /* ── Table ── */
@@ -429,7 +428,8 @@
   padding: 8px 12px;
   border-radius: 8px;
   margin-top: 12px;
-  width: fit-content;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 :global(.dark) .couponSuccess {
@@ -448,7 +448,8 @@
   padding: 8px 12px;
   border-radius: 8px;
   margin-top: 12px;
-  width: fit-content;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 :global(.dark) .couponErrorMsg { background: rgb(239 68 68 / 15%); }
