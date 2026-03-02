@@ -173,8 +173,6 @@ export const PaymentPage: React.FC = () => {
         cartItemCount={cartItemCount}
         onSearch={() => {}}
         onCartClick={() => navigate('/cart')}
-        onWishlistClick={() => {}}
-        onProfileClick={() => {}}
       />
 
       <main className={styles.page}>

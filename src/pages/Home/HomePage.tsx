@@ -76,7 +76,7 @@ export const HomePage: React.FC = () => {
   const { data: productDtos = [], isLoading, isError } = useProducts();
 
   // useFilters trabaja con ProductResponseDto (tiene `description` para búsqueda)
-  const { filters, filtered: filteredDtos, setCategory } = useFilters(productDtos);
+  const { filters, filtered: filteredDtos, setCategory, setSearch } = useFilters(productDtos);
 
   // Mapear a Product (tipo del frontend) solo los registros ya filtrados
   const filtered = React.useMemo(
@@ -100,7 +100,6 @@ export const HomePage: React.FC = () => {
     return date;
   }, []);
 
-  const handleSearch = (query: string) => console.log('Search:', query);
 
   const handleAddToCart = (productId: string) => {
     const product = productDtos.find((p) => p.id === productId);
@@ -115,12 +114,9 @@ export const HomePage: React.FC = () => {
   return (
     <>
       <Navbar
-        user={{ name: 'Ana' }}
         cartItemCount={cartItemCount}
-        onSearch={handleSearch}
+        onSearch={setSearch}
         onCartClick={() => navigate('/cart')}
-        onWishlistClick={() => console.log('Wishlist clicked')}
-        onProfileClick={() => console.log('Profile clicked')}
       />
 
       <main className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">

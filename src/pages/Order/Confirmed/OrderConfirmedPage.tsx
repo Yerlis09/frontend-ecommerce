@@ -110,7 +110,7 @@ export const OrderConfirmedPage: React.FC = () => {
   if (!payment) {
     return (
       <>
-        <Navbar cartItemCount={0} onSearch={() => {}} onCartClick={() => navigate('/cart')} onWishlistClick={() => {}} onProfileClick={() => {}} />
+        <Navbar cartItemCount={0} onCartClick={() => navigate('/cart')} />
         <main className={styles.page}>
           <div className={styles.emptyState}>
             <span className="material-symbols-outlined" style={{ fontSize: '64px', color: '#cbd5e1' }}>receipt_long</span>
@@ -152,10 +152,7 @@ export const OrderConfirmedPage: React.FC = () => {
 
       <Navbar
         cartItemCount={cartItemCount}
-        onSearch={() => {}}
         onCartClick={() => navigate('/cart')}
-        onWishlistClick={() => {}}
-        onProfileClick={() => {}}
       />
 
       <main className={styles.page}>

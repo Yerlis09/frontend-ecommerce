@@ -92,7 +92,7 @@ export const CheckoutPage: React.FC = () => {
   if (isEmpty) {
     return (
       <>
-        <Navbar cartItemCount={0} onSearch={() => {}} onCartClick={() => navigate('/cart')} onWishlistClick={() => {}} onProfileClick={() => {}} />
+        <Navbar cartItemCount={0} onCartClick={() => navigate('/cart')} />
         <main className={styles.page}>
           <div className={styles.emptyState}>
             <span className="material-symbols-outlined" style={{ fontSize: '72px', color: '#cbd5e1' }}>shopping_cart</span>
@@ -292,10 +292,7 @@ export const CheckoutPage: React.FC = () => {
     <>
       <Navbar
         cartItemCount={cartItemCount}
-        onSearch={() => {}}
         onCartClick={() => navigate('/cart')}
-        onWishlistClick={() => {}}
-        onProfileClick={() => {}}
       />
 
       <main className={styles.page}>

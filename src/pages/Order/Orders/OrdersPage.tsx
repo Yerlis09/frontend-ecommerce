@@ -210,10 +210,7 @@ export const OrdersPage: React.FC = () => {
     <>
       <Navbar
         cartItemCount={cartItemCount}
-        onSearch={() => {}}
         onCartClick={() => navigate('/cart')}
-        onWishlistClick={() => {}}
-        onProfileClick={() => {}}
       />
 
       <main className={styles.page}>

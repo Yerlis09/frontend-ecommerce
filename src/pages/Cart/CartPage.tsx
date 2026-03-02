@@ -67,10 +67,7 @@ export const CartPage: React.FC = () => {
       <>
         <Navbar
           cartItemCount={0}
-          onSearch={(q) => console.log('Search:', q)}
           onCartClick={() => navigate('/cart')}
-          onWishlistClick={() => {}}
-          onProfileClick={() => {}}
         />
         <main className={styles.page}>
           <div className={styles.emptyState}>
@@ -94,10 +91,7 @@ export const CartPage: React.FC = () => {
     <>
       <Navbar
         cartItemCount={totalItems}
-        onSearch={(q) => console.log('Search:', q)}
         onCartClick={() => navigate('/cart')}
-        onWishlistClick={() => {}}
-        onProfileClick={() => {}}
       />
 
       <main className={styles.page}>

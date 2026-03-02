@@ -96,10 +96,7 @@ export const ProductDetailPage: React.FC = () => {
     <>
       <Navbar
         cartItemCount={totalItems}
-        onSearch={(q) => console.log('Search:', q)}
         onCartClick={() => navigate('/cart')}
-        onWishlistClick={() => {}}
-        onProfileClick={() => {}}
       />
 
       <main className={styles.page}>
