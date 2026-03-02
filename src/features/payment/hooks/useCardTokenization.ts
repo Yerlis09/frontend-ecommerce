@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { wompiService } from '../../../services/wompi.service';
-import { WOMPI_PUBLIC_KEY } from '../../../config/wompi.config';
 import type { CardFormData } from '../types/payment.types';
 
 export const useCardTokenization = () => {
