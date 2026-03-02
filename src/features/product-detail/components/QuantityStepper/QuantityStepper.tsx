@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './QuantityStepper.module.css';
+import Icon from '../../../../shared/components/ui/Icon/Icon';
 
 interface QuantityStepperProps {
   value: number;
@@ -21,7 +22,7 @@ export const QuantityStepper: React.FC<QuantityStepperProps> = ({
       disabled={value <= min}
       aria-label="Reducir cantidad"
     >
-      <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>remove</span>
+      <Icon name="remove" size={18} />
     </button>
     <span className={styles.value}>{value}</span>
     <button
@@ -30,7 +31,7 @@ export const QuantityStepper: React.FC<QuantityStepperProps> = ({
       disabled={value >= max}
       aria-label="Aumentar cantidad"
     >
-      <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>add</span>
+      <Icon name="add" size={18} />
     </button>
   </div>
 );

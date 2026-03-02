@@ -9,6 +9,7 @@ import { useToast } from '../../shared/hooks/useToast';
 import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
 import { Footer } from '../../shared/components/layout/Footer/Footer';
 import { formatCOP } from '../../shared/utils/currency';
+import Icon from '../../shared/components/ui/Icon/Icon';
 import styles from './CheckoutPage.module.css';
 
 // ── Colombian departments + cities ───────────────────────────────────────────
@@ -95,11 +96,11 @@ export const CheckoutPage: React.FC = () => {
         <Navbar cartItemCount={0} onCartClick={() => navigate('/cart')} />
         <main className={styles.page}>
           <div className={styles.emptyState}>
-            <span className="material-symbols-outlined" style={{ fontSize: '72px', color: '#cbd5e1' }}>shopping_cart</span>
+            <Icon name="shopping_cart" size={72} style={{ color: '#cbd5e1' }} />
             <h2 className={styles.emptyTitle}>Tu carrito está vacío</h2>
             <p className={styles.emptyText}>Agrega productos antes de continuar.</p>
             <button className={styles.btnPrimary} onClick={() => navigate('/')}>
-              <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span>
+              <Icon name="arrow_back" size={20} />
               <span>Ir a la tienda</span>
             </button>
           </div>
@@ -244,49 +245,20 @@ export const CheckoutPage: React.FC = () => {
   };
 
   // ── Email field right icon based on lookup status ─────────────────────────
+  const iconStyle = { position: 'absolute' as const, right: '10px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' as const };
+
   const EmailIcon = () => {
-    if (lookupStatus === 'searching') {
-      return <span className={styles.spinner} />;
-    }
-    if (lookupStatus === 'found') {
-      return (
-        <span className="material-symbols-outlined" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: '#22c55e', pointerEvents: 'none' }}>
-          check_circle
-        </span>
-      );
-    }
-    if (lookupStatus === 'not-found') {
-      return (
-        <span className="material-symbols-outlined" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: '#3b82f6', pointerEvents: 'none' }}>
-          person_add
-        </span>
-      );
-    }
-    if (lookupStatus === 'error') {
-      return (
-        <span className="material-symbols-outlined" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: '#f59e0b', pointerEvents: 'none' }}>
-          warning
-        </span>
-      );
-    }
-    // idle – show check only if field has a valid value
-    if (form.email.trim() && !hasError('email')) {
-      return (
-        <span className="material-symbols-outlined" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: '#22c55e', pointerEvents: 'none' }}>
-          check_circle
-        </span>
-      );
-    }
+    if (lookupStatus === 'searching') return <span className={styles.spinner} />;
+    if (lookupStatus === 'found')     return <Icon name="check_circle" size={20} style={{ ...iconStyle, color: '#22c55e' }} />;
+    if (lookupStatus === 'not-found') return <Icon name="person_add"   size={20} style={{ ...iconStyle, color: '#3b82f6' }} />;
+    if (lookupStatus === 'error')     return <Icon name="warning"      size={20} style={{ ...iconStyle, color: '#f59e0b' }} />;
+    if (form.email.trim() && !hasError('email'))
+      return <Icon name="check_circle" size={20} style={{ ...iconStyle, color: '#22c55e' }} />;
     return null;
   };
 
-  // Generic valid-field icon for other inputs
   const ValidIcon = ({ show }: { show: boolean }) =>
-    show ? (
-      <span className="material-symbols-outlined" style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: '#22c55e', pointerEvents: 'none' }}>
-        check_circle
-      </span>
-    ) : null;
+    show ? <Icon name="check_circle" size={20} style={{ ...iconStyle, color: '#22c55e' }} /> : null;
 
   return (
     <>
@@ -306,9 +278,7 @@ export const CheckoutPage: React.FC = () => {
                 <span className={styles.stepLabel}>{label}</span>
               </div>
               {i < 3 && (
-                <span className="material-symbols-outlined" style={{ fontSize: '18px', color: '#cbd5e1', flexShrink: 0 }}>
-                  chevron_right
-                </span>
+                <Icon name="chevron_right" size={18} style={{ color: '#cbd5e1', flexShrink: 0 }} />
               )}
             </React.Fragment>
           ))}
@@ -320,7 +290,7 @@ export const CheckoutPage: React.FC = () => {
         {/* ── Lookup status banners ── */}
         {lookupStatus === 'found' && (
           <div className={`${styles.lookupBanner} ${styles.lookupBannerFound}`}>
-            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>check_circle</span>
+            <Icon name="check_circle" size={20} />
             <div>
               <p className={styles.lookupBannerTitle}>Cliente encontrado</p>
               <p className={styles.lookupBannerSub}>Tus datos han sido cargados automáticamente. Puedes editarlos si lo necesitas.</p>
@@ -330,7 +300,7 @@ export const CheckoutPage: React.FC = () => {
 
         {lookupStatus === 'not-found' && (
           <div className={`${styles.lookupBanner} ${styles.lookupBannerNew}`}>
-            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>person_add</span>
+            <Icon name="person_add" size={20} />
             <div>
               <p className={styles.lookupBannerTitle}>Nuevo cliente</p>
               <p className={styles.lookupBannerSub}>Completa tus datos para continuar. Los guardaremos para futuras compras.</p>
@@ -340,7 +310,7 @@ export const CheckoutPage: React.FC = () => {
 
         {lookupStatus === 'error' && (
           <div className={`${styles.lookupBanner} ${styles.lookupBannerWarn}`}>
-            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>warning</span>
+            <Icon name="warning" size={20} />
             <div>
               <p className={styles.lookupBannerTitle}>No pudimos verificar tu correo</p>
               <p className={styles.lookupBannerSub}>Completa tus datos manualmente para continuar.</p>
@@ -358,7 +328,7 @@ export const CheckoutPage: React.FC = () => {
               {/* Section 1 – Personal info */}
               <section className={styles.card}>
                 <h2 className={styles.sectionTitle}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#7e3ae4' }}>person</span>
+                  <Icon name="person" size={22} style={{ color: '#7e3ae4' }} />
                   Información Personal
                 </h2>
 
@@ -474,7 +444,7 @@ export const CheckoutPage: React.FC = () => {
               {/* Section 2 – Address + Shipping method */}
               <section className={styles.card}>
                 <h2 className={styles.sectionTitle}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#7e3ae4' }}>local_shipping</span>
+                  <Icon name="local_shipping" size={22} style={{ color: '#7e3ae4' }} />
                   Dirección de Envío
                 </h2>
 
@@ -667,7 +637,7 @@ export const CheckoutPage: React.FC = () => {
                     ) : (
                       <>
                         <span>Continuar al Pago</span>
-                        <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_forward</span>
+                        <Icon name="arrow_forward" size={20} />
                       </>
                     )}
                   </button>

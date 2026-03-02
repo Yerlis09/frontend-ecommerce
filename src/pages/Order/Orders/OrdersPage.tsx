@@ -9,6 +9,7 @@ import type { ApiError } from '../../../shared/types/api.types';
 import { formatCOP, fromCents } from '../../../shared/utils/currency';
 import { Navbar } from '../../../shared/components/layout/Navbar/Navbar';
 import { Footer } from '../../../shared/components/layout/Footer/Footer';
+import Icon from '../../../shared/components/ui/Icon/Icon';
 import styles from './OrdersPage.module.css';
 
 // ── Status config ──────────────────────────────────────────────────────────────
@@ -54,9 +55,7 @@ const OrderCard: React.FC<{ order: PaymentResponseDto }> = ({ order }) => {
 
         {/* Status icon */}
         <div className={styles.statusIcon} style={{ background: cfg.bg }}>
-          <span className="material-symbols-outlined" style={{ fontSize: '22px', color: cfg.color }}>
-            {cfg.icon}
-          </span>
+          <Icon name={cfg.icon} size={22} style={{ color: cfg.color }} />
         </div>
 
         {/* Info */}
@@ -84,12 +83,7 @@ const OrderCard: React.FC<{ order: PaymentResponseDto }> = ({ order }) => {
             onClick={() => setOpen((o) => !o)}
             aria-expanded={open}
           >
-            <span
-              className="material-symbols-outlined"
-              style={{ fontSize: '20px', transition: 'transform 0.2s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }}
-            >
-              expand_more
-            </span>
+            <Icon name="expand_more" size={20} style={{ transition: 'transform 0.2s', transform: open ? 'rotate(180deg)' : 'rotate(0deg)' }} />
           </button>
         </div>
 
@@ -158,7 +152,7 @@ const OrderCard: React.FC<{ order: PaymentResponseDto }> = ({ order }) => {
 
           {order.errorMessage && (
             <p className={styles.errorNote}>
-              <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>error</span>
+              <Icon name="error" size={16} />
               {order.errorMessage}
             </p>
           )}
@@ -219,9 +213,7 @@ export const OrdersPage: React.FC = () => {
           {/* ── Header ── */}
           <div className={styles.pageHeader}>
             <div className={styles.headerIcon}>
-              <span className="material-symbols-outlined" style={{ fontSize: '28px', color: '#7e3ae4' }}>
-                receipt_long
-              </span>
+              <Icon name="receipt_long" size={28} style={{ color: '#7e3ae4' }} />
             </div>
             <div>
               <h1 className={styles.pageTitle}>Mis Pedidos</h1>
@@ -232,9 +224,7 @@ export const OrdersPage: React.FC = () => {
           {/* ── Search form ── */}
           <form onSubmit={handleSearch} className={styles.searchForm}>
             <div className={styles.searchInputWrapper}>
-              <span className="material-symbols-outlined" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: '#94a3b8', pointerEvents: 'none' }}>
-                search
-              </span>
+              <Icon name="search" size={20} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', pointerEvents: 'none' }} />
               <input
                 type="email"
                 className={styles.searchInput}
@@ -254,7 +244,7 @@ export const OrdersPage: React.FC = () => {
                 <span className={styles.spinner} />
               ) : (
                 <>
-                  <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>search</span>
+                  <Icon name="search" size={18} />
                   Buscar pedidos
                 </>
               )}
@@ -272,7 +262,7 @@ export const OrdersPage: React.FC = () => {
           {/* ── Error ── */}
           {status === 'error' && (
             <div className={styles.messageBox}>
-              <span className="material-symbols-outlined" style={{ fontSize: '40px', color: '#dc2626' }}>inbox</span>
+              <Icon name="inbox" size={40} style={{ color: '#dc2626' }} />
               <p className={styles.messageTitle}>{errorMsg}</p>
               <p className={styles.messageSub}>Verifica que el correo sea correcto e intenta de nuevo.</p>
             </div>
@@ -281,7 +271,7 @@ export const OrdersPage: React.FC = () => {
           {/* ── Results ── */}
           {status === 'done' && orders.length === 0 && (
             <div className={styles.messageBox}>
-              <span className="material-symbols-outlined" style={{ fontSize: '40px', color: '#cbd5e1' }}>receipt_long</span>
+              <Icon name="receipt_long" size={40} style={{ color: '#cbd5e1' }} />
               <p className={styles.messageTitle}>Sin pedidos</p>
               <p className={styles.messageSub}>No encontramos transacciones asociadas a este correo.</p>
             </div>
@@ -306,7 +296,7 @@ export const OrdersPage: React.FC = () => {
 
           {/* ── Back link ── */}
           <button className={styles.backLink} onClick={() => navigate('/')}>
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>arrow_back</span>
+            <Icon name="arrow_back" size={16} />
             Volver a la tienda
           </button>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import  type { FooterProps, TrustBadge } from './Footer.types';
 import { cn } from '../../../utils/cn';
 import styles from './Footer.module.css';
+import Icon from '../../ui/Icon/Icon';
 
 const defaultBadges: TrustBadge[] = [
   {
@@ -35,9 +36,7 @@ export const Footer: React.FC<FooterProps> = ({
           {badges.map((badge, index) => (
             <div key={index} className={styles.badge}>
               <div className={cn(styles.badgeIcon, styles[badge.color])}>
-                <span className="material-symbols-outlined text-3xl">
-                  {badge.icon}
-                </span>
+                <Icon name={badge.icon} size={30} />
               </div>
               <div className={styles.badgeContent}>
                 <h4 className={styles.badgeTitle}>{badge.title}</h4>

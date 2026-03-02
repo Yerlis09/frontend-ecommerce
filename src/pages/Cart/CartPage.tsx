@@ -5,6 +5,7 @@ import { discountCodesService } from '../../services/discount-codes.service';
 import { Footer } from '../../shared/components/layout/Footer/Footer';
 import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
 import { formatCOP } from '../../shared/utils/currency';
+import Icon from '../../shared/components/ui/Icon/Icon';
 import styles from './CartPage.module.css';
 
 // Matches BASE_FEE in useCart.ts
@@ -71,13 +72,11 @@ export const CartPage: React.FC = () => {
         />
         <main className={styles.page}>
           <div className={styles.emptyState}>
-            <span className="material-symbols-outlined" style={{ fontSize: '72px', color: '#cbd5e1' }}>
-              shopping_cart
-            </span>
+            <Icon name="shopping_cart" size={72} style={{ color: '#cbd5e1' }} />
             <h2 className={styles.emptyTitle}>Tu carrito está vacío</h2>
             <p className={styles.emptyText}>Aún no has agregado ningún producto.</p>
             <button className={styles.btnPrimary} onClick={() => navigate('/')}>
-              <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span>
+              <Icon name="arrow_back" size={20} />
               <span>Ir a la tienda</span>
             </button>
           </div>
@@ -97,7 +96,7 @@ export const CartPage: React.FC = () => {
       <main className={styles.page}>
         <div className={styles.pageHeader}>
           <button className={styles.backBtn} onClick={() => navigate('/')} aria-label="Volver al inicio">
-            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span>
+            <Icon name="arrow_back" size={20} />
             <span>Seguir comprando</span>
           </button>
           <h1 className={styles.heading}>
@@ -128,7 +127,7 @@ export const CartPage: React.FC = () => {
                       <tr key={product.id} className={styles.row}>
 
                         {/* Product info */}
-                        <td className={styles.td}>
+                        <td className={`${styles.td} ${styles.productTd}`}>
                           <div className={styles.productCell}>
                             <div
                               className={styles.imgWrapper}
@@ -161,7 +160,7 @@ export const CartPage: React.FC = () => {
                         </td>
 
                         {/* Quantity stepper */}
-                        <td className={styles.td}>
+                        <td className={`${styles.td} ${styles.stepperTd}`}>
                           <div className={styles.stepper}>
                             <button
                               className={styles.stepperBtn}
@@ -169,7 +168,7 @@ export const CartPage: React.FC = () => {
                               disabled={quantity <= 1}
                               aria-label="Reducir cantidad"
                             >
-                              <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>remove</span>
+                              <Icon name="remove" size={16} />
                             </button>
                             <span className={styles.stepperValue}>{quantity}</span>
                             <button
@@ -178,7 +177,7 @@ export const CartPage: React.FC = () => {
                               disabled={quantity >= Math.min(product.stock, 50)}
                               aria-label="Aumentar cantidad"
                             >
-                              <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>add</span>
+                              <Icon name="add" size={16} />
                             </button>
                           </div>
                         </td>
@@ -195,7 +194,7 @@ export const CartPage: React.FC = () => {
                             onClick={() => removeItem(product.id)}
                             aria-label="Eliminar del carrito"
                           >
-                            <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>delete</span>
+                            <Icon name="delete" size={20} />
                           </button>
                         </td>
 
@@ -213,20 +212,18 @@ export const CartPage: React.FC = () => {
                   <label className={styles.couponLabel}>Código de descuento</label>
                   <div className={styles.couponInputRow}>
                     <div className={styles.couponInputWrapper}>
-                      <span
-                        className="material-symbols-outlined"
+                      <Icon
+                        name="sell"
+                        size={20}
                         style={{
                           position: 'absolute',
                           left: '12px',
                           top: '50%',
                           transform: 'translateY(-50%)',
-                          fontSize: '20px',
                           color: '#726487',
                           pointerEvents: 'none',
                         }}
-                      >
-                        sell
-                      </span>
+                      />
                       <input
                         className={`${styles.couponInput} ${couponError ? styles.couponInputError : ''}`}
                         placeholder="Ingresa tu cupón"
@@ -259,14 +256,14 @@ export const CartPage: React.FC = () => {
 
               {discountCode && (
                 <div className={styles.couponSuccess}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>check_circle</span>
+                  <Icon name="check_circle" size={16} />
                   Código {discountCode} aplicado — -{formatCOP(discountAmount)}
                 </div>
               )}
 
               {couponError && (
                 <div className={styles.couponErrorMsg}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>error</span>
+                  <Icon name="error" size={16} />
                   {couponError}
                 </div>
               )}
@@ -275,7 +272,7 @@ export const CartPage: React.FC = () => {
             {/* Mobile: continue shopping */}
             <div className={styles.continueShoppingMobile}>
               <Link to="/" className={styles.continueLink}>
-                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>arrow_back</span>
+                <Icon name="arrow_back" size={18} />
                 Continuar comprando
               </Link>
             </div>
@@ -303,13 +300,12 @@ export const CartPage: React.FC = () => {
                 <div className={styles.summaryLine}>
                   <span className={styles.summaryLabelFee}>
                     Tarifa de servicio
-                    <span
-                      className="material-symbols-outlined"
+                    <Icon
+                      name="info"
+                      size={14}
+                      style={{ marginLeft: '4px', cursor: 'help' }}
                       title="Tarifa por procesamiento de pagos seguros"
-                      style={{ fontSize: '14px', marginLeft: '4px', cursor: 'help' }}
-                    >
-                      info
-                    </span>
+                    />
                   </span>
                   <span className={styles.summaryValue}>{formatCOP(SERVICE_FEE)}</span>
                 </div>
@@ -327,7 +323,7 @@ export const CartPage: React.FC = () => {
 
               <button className={styles.checkoutBtn} onClick={() => navigate('/checkout')}>
                 <span>Proceder al pago</span>
-                <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_forward</span>
+                <Icon name="arrow_forward" size={20} />
               </button>
 
               <div className={styles.paymentSection}>
@@ -339,7 +335,7 @@ export const CartPage: React.FC = () => {
                   <PaymentChip label="NEQUI" className={styles.chipNequi} />
                 </div>
                 <div className={styles.wompiNote}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>lock</span>
+                  <Icon name="lock" size={14} />
                   Pagos procesados de forma segura por Wompi
                 </div>
               </div>
@@ -348,7 +344,7 @@ export const CartPage: React.FC = () => {
             {/* Desktop: continue shopping */}
             <div className={styles.continueShoppingDesktop}>
               <Link to="/" className={styles.continueLink}>
-                <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>arrow_back</span>
+                <Icon name="arrow_back" size={16} />
                 Continuar comprando
               </Link>
             </div>

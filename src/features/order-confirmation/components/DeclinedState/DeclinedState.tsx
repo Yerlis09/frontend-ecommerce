@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { PaymentResponseDto } from '../../../../services/payments.service';
+import Icon from '../../../../shared/components/ui/Icon/Icon';
 
 interface DeclinedStateProps {
   payment: PaymentResponseDto;
@@ -11,9 +12,7 @@ export const DeclinedState: React.FC<DeclinedStateProps> = ({ payment }) => {
 
   return (
     <div style={{ textAlign: 'center', padding: '48px 24px' }}>
-      <span className="material-symbols-outlined" style={{ fontSize: '80px', color: '#ef4444' }}>
-        cancel
-      </span>
+      <Icon name="cancel" size={80} style={{ color: '#ef4444' }} />
       <h1 style={{ marginTop: '16px', color: '#991b1b' }}>Pago rechazado</h1>
       {payment.errorMessage && (
         <p style={{ color: '#64748b' }}>Motivo: {payment.errorMessage}</p>

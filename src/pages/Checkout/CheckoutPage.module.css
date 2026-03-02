@@ -737,3 +737,63 @@
   background: #6d28d9;
   transform: scale(1.02);
 }
+
+/* ── Mobile responsive ──────────────────────────────────────────────────── */
+@media (max-width: 599px) {
+  /* Tighter page padding */
+  .page { padding: 20px 12px 48px; }
+
+  /* Heading: smaller on mobile */
+  .heading {
+    font-size: 1.375rem;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  /* Section cards: reduce internal padding */
+  .card { padding: 16px; }
+
+  /* Section title: slightly smaller */
+  .sectionTitle { font-size: 1rem; }
+
+  /* Field grid: force single column on very small screens */
+  .fieldGrid { grid-template-columns: 1fr; }
+
+  /* Shipping options: single column below 480px */
+  .shippingOptions { grid-template-columns: 1fr; }
+
+  /* Login prompt: compact on mobile */
+  .loginPrompt { padding: 14px 16px; margin-bottom: 20px; }
+
+  /* Summary card: remove sticky (stacked layout, not side-by-side) */
+  .summaryCard { position: static; }
+
+  /* Summary header/body: tighter padding */
+  .summaryHeader { padding: 14px 16px; }
+  .itemsList { padding: 14px 16px; max-height: 220px; }
+  .priceBreakdown { padding: 14px 16px; }
+
+  /* Summary item name: allow wrapping (no ellipsis on mobile) */
+  .summaryItemName {
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Summary item price: less margin */
+  .summaryItemPrice { margin-left: 8px; }
+
+  /* CTA button: slightly smaller text */
+  .ctaBtn { font-size: 0.9375rem; padding: 14px 20px; }
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+  /* Tablet: keep 2-col fields but tighten card padding */
+  .card { padding: 20px; }
+  .summaryCard { position: static; }
+  .summaryHeader { padding: 16px 20px; }
+  .itemsList { padding: 16px 20px; }
+  .priceBreakdown { padding: 16px 20px; }
+}

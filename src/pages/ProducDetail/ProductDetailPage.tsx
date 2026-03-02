@@ -7,6 +7,7 @@ import { useProductDetail } from '../../features/product-detail/hooks/useProduct
 import { Footer } from '../../shared/components/layout/Footer/Footer';
 import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
 import { Skeleton } from '../../shared/components/ui/Skeleton/Skeleton';
+import Icon from '../../shared/components/ui/Icon/Icon';
 import { useToast } from '../../shared/hooks/useToast';
 import { formatCOP } from '../../shared/utils/currency';
 import { addItem as addItemAction } from '../../store/cartSlice';
@@ -23,17 +24,15 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
         const isHalf = i === full && hasHalf;
         const isFull = i < full;
         return (
-          <span
+          <Icon
             key={i}
-            className="material-symbols-outlined"
+            name={isHalf ? 'star_half' : 'star'}
+            size={20}
             style={{
-              fontSize: '20px',
               color: isFull || isHalf ? '#fbbf24' : '#cbd5e1',
               fontVariationSettings: isFull ? '"FILL" 1' : '"FILL" 0',
             }}
-          >
-            {isHalf ? 'star_half' : 'star'}
-          </span>
+          />
         );
       })}
     </div>
@@ -126,9 +125,7 @@ export const ProductDetailPage: React.FC = () => {
         {/* ── Error ── */}
         {error && !isLoading && (
           <div className={styles.errorState}>
-            <span className="material-symbols-outlined" style={{ fontSize: '64px', color: '#ef4444' }}>
-              search_off
-            </span>
+            <Icon name="search_off" size={64} style={{ color: '#ef4444' }} />
             <h2>Producto no encontrado</h2>
             <p>El producto que buscas no existe o no está disponible.</p>
             <button className={styles.btnPrimary} onClick={() => navigate('/')}>
@@ -201,9 +198,7 @@ export const ProductDetailPage: React.FC = () => {
                     const stock = getStockInfo(product.stock);
                     return (
                       <div className={[styles.stockBadge, stock.isOut ? styles.stockOut : ''].join(' ')}>
-                        <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>
-                          {stock.icon}
-                        </span>
+                        <Icon name={stock.icon} size={18} />
                         <span>{stock.isOut ? 'Sin stock' : `En stock — ${stock.text}`}</span>
                       </div>
                     );
@@ -223,9 +218,7 @@ export const ProductDetailPage: React.FC = () => {
                       disabled={product.stock === 0}
                     >
                       <span>Comprar ahora</span>
-                      <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
-                        arrow_forward
-                      </span>
+                      <Icon name="arrow_forward" size={20} />
                     </button>
                   </div>
 
@@ -235,9 +228,7 @@ export const ProductDetailPage: React.FC = () => {
                     onClick={handleAddToCart}
                     disabled={product.stock === 0}
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>
-                      shopping_bag
-                    </span>
+                    <Icon name="shopping_bag" size={20} />
                     <span>Agregar al carrito</span>
                   </button>
 
@@ -245,7 +236,7 @@ export const ProductDetailPage: React.FC = () => {
                   <div className={styles.trustSignal}>
                     <span className={styles.trustLabel}>Pagos seguros con</span>
                     <div className={styles.wompiChip}>
-                      <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>lock</span>
+                      <Icon name="lock" size={14} />
                       WOMPI
                     </div>
                   </div>
@@ -258,9 +249,7 @@ export const ProductDetailPage: React.FC = () => {
                   <details className={styles.accordion} open>
                     <summary className={styles.accordionSummary}>
                       <span>Descripción</span>
-                      <span className={`material-symbols-outlined ${styles.accordionChevron}`}>
-                        keyboard_arrow_down
-                      </span>
+                      <Icon name="keyboard_arrow_down" className={styles.accordionChevron} />
                     </summary>
                     <div className={styles.accordionBody}>{product.description}</div>
                   </details>
@@ -269,9 +258,7 @@ export const ProductDetailPage: React.FC = () => {
                   <details className={styles.accordion}>
                     <summary className={styles.accordionSummary}>
                       <span>Envío y Devoluciones</span>
-                      <span className={`material-symbols-outlined ${styles.accordionChevron}`}>
-                        keyboard_arrow_down
-                      </span>
+                      <Icon name="keyboard_arrow_down" className={styles.accordionChevron} />
                     </summary>
                     <div className={styles.accordionBody}>
                       <p style={{ marginBottom: '8px' }}>

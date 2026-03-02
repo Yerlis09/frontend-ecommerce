@@ -1,10 +1,9 @@
 import React from 'react';
+import Icon from '../../../../shared/components/ui/Icon/Icon';
 
 export const PendingState: React.FC = () => (
   <div style={{ textAlign: 'center', padding: '48px 24px' }}>
-    <span className="material-symbols-outlined" style={{ fontSize: '80px', color: '#f59e0b' }}>
-      hourglass_top
-    </span>
+    <Icon name="hourglass_top" size={80} style={{ color: '#f59e0b' }} />
     <h1 style={{ marginTop: '16px', color: '#92400e' }}>Pago en proceso</h1>
     <p style={{ color: '#64748b' }}>
       Tu pago está siendo procesado. Esta página se actualizará automáticamente.

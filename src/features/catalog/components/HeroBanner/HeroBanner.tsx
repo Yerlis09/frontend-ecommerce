@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Icon from '../../../../shared/components/ui/Icon/Icon';
 import { type HeroBannerProps } from '../../types/product.types';
 import styles from './HeroBanner.module.css';
 
@@ -24,7 +25,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
 
     const calculateTimeLeft = () => {
       const difference = endTime.getTime() - new Date().getTime();
-      
+
       if (difference > 0) {
         setTimeLeft({
           hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
@@ -46,9 +47,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
       <div className={styles.content}>
         <div className={styles.textContent}>
           <div className={styles.flashBadge}>
-            <span className={`material-symbols-outlined ${styles.flashIcon}`}>
-              local_fire_department
-            </span>
+            <Icon name="local_fire_department" className={styles.flashIcon} />
             Flash Sale Ends Soon!
           </div>
 
@@ -62,7 +61,7 @@ export const HeroBanner: React.FC<HeroBannerProps> = ({
           <div className={styles.ctaContainer}>
             <button className={styles.ctaButton} onClick={onCtaClick}>
               {ctaText}
-              <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              <Icon name="arrow_forward" size={16} />
             </button>
 
             {endTime && (

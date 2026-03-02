@@ -10,6 +10,7 @@ import { paymentsService } from '../../services/payments.service';
 import { wompiService } from '../../services/wompi.service';
 import { Footer } from '../../shared/components/layout/Footer/Footer';
 import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
+import Icon from '../../shared/components/ui/Icon/Icon';
 import { useToast } from '../../shared/hooks/useToast';
 import type { ApiError } from '../../shared/types/api.types';
 import { formatCOP } from '../../shared/utils/currency';
@@ -182,7 +183,7 @@ export const PaymentPage: React.FC = () => {
           {(['Carrito', 'Envío', 'Pago'] as const).map((label, i) => (
             <React.Fragment key={label}>
               <div className={`${styles.stepItem} ${i === 2 ? styles.stepActive : styles.stepDone}`}>
-                <span className={styles.stepCircle}>{i === 2 ? 3 : <span className="material-symbols-outlined" style={{ fontSize: '14px' }}>check</span>}</span>
+                <span className={styles.stepCircle}>{i === 2 ? 3 : <Icon name="check" size={14} />}</span>
                 {label}
               </div>
               {i < 2 && <span className={styles.stepSep}>/</span>}
@@ -201,7 +202,7 @@ export const PaymentPage: React.FC = () => {
               <div className={styles.cardHeader}>
                 <div>
                   <h1 className={styles.cardTitle}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '24px', color: '#7e3ae4' }}>credit_card</span>
+                    <Icon name="credit_card" size={24} style={{ color: '#7e3ae4' }} />
                     Información de pago
                   </h1>
                   <p className={styles.cardSubtitle}>
@@ -225,7 +226,7 @@ export const PaymentPage: React.FC = () => {
                     className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : ''}`}
                     onClick={() => setActiveTab(tab.id)}
                   >
-                    <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>{tab.icon}</span>
+                    <Icon name={tab.icon} size={18} />
                     {tab.label}
                   </button>
                 ))}
@@ -234,7 +235,7 @@ export const PaymentPage: React.FC = () => {
               {/* Error banner */}
               {errorMsg && (
                 <div className={styles.errorBanner}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>error</span>
+                  <Icon name="error" size={20} />
                   <p>{errorMsg}</p>
                 </div>
               )}
@@ -262,9 +263,7 @@ export const PaymentPage: React.FC = () => {
                         Número de Tarjeta <span className={styles.required}>*</span>
                       </label>
                       <div className={styles.inputWrapper}>
-                        <span className="material-symbols-outlined" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: '#94a3b8', pointerEvents: 'none' }}>
-                          credit_card
-                        </span>
+                        <Icon name="credit_card" size={20} style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', pointerEvents: 'none' }} />
                         <input
                           id="cardNumber" type="text" inputMode="numeric"
                           className={`${styles.input} ${styles.inputPadded} ${hasError('cardNumber') ? styles.inputError : ''}`}
@@ -322,7 +321,7 @@ export const PaymentPage: React.FC = () => {
                       <div className={styles.fieldGroup}>
                         <label className={styles.label} htmlFor="cvv" style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
                           CVV <span className={styles.required}>*</span>
-                          <span className="material-symbols-outlined" title="Código de 3 dígitos al reverso de tu tarjeta" style={{ fontSize: '15px', color: '#94a3b8', cursor: 'help' }}>help</span>
+                          <Icon name="help" size={15} title="Código de 3 dígitos al reverso de tu tarjeta" style={{ color: '#94a3b8', cursor: 'help' }} />
                         </label>
                         <div className={styles.inputWrapper}>
                           <input
@@ -335,9 +334,7 @@ export const PaymentPage: React.FC = () => {
                             onBlur={blur('cvv')}
                             autoComplete="cc-csc"
                           />
-                          <span className="material-symbols-outlined" style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '18px', color: '#94a3b8', pointerEvents: 'none' }}>
-                            lock
-                          </span>
+                          <Icon name="lock" size={18} style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: '#94a3b8', pointerEvents: 'none' }} />
                         </div>
                         {hasError('cvv') && <span className={styles.errorMsg}>CVV requerido</span>}
                       </div>
@@ -358,9 +355,7 @@ export const PaymentPage: React.FC = () => {
                         >
                           <option value="1">1 Cuota</option>
                         </select>
-                        <span className="material-symbols-outlined" style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', fontSize: '20px', color: '#64748b', pointerEvents: 'none' }}>
-                          expand_more
-                        </span>
+                        <Icon name="expand_more" size={20} style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: '#64748b', pointerEvents: 'none' }} />
                       </div>
                     </div>
 
@@ -368,7 +363,7 @@ export const PaymentPage: React.FC = () => {
 
                   {/* Security notice */}
                   <div className={styles.securityNote}>
-                    <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#7e3ae4', flexShrink: 0 }}>verified_user</span>
+                    <Icon name="verified_user" size={20} style={{ color: '#7e3ae4', flexShrink: 0 }} />
                     <div>
                       <h4 className={styles.securityTitle}>Pagos seguros encriptados</h4>
                       <p className={styles.securityText}>
@@ -383,7 +378,7 @@ export const PaymentPage: React.FC = () => {
               {/* Other payment method tabs → Próximamente */}
               {activeTab !== 'card' && (
                 <div className={styles.comingSoon}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '48px', color: '#cbd5e1' }}>construction</span>
+                  <Icon name="construction" size={48} style={{ color: '#cbd5e1' }} />
                   <p className={styles.comingSoonTitle}>Próximamente</p>
                   <p className={styles.comingSoonSub}>Este método de pago estará disponible pronto.</p>
                 </div>
@@ -456,7 +451,7 @@ export const PaymentPage: React.FC = () => {
                     </>
                   ) : (
                     <>
-                      <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>lock</span>
+                      <Icon name="lock" size={20} />
                       <span>Confirmar y Pagar</span>
                     </>
                   )}
@@ -472,7 +467,7 @@ export const PaymentPage: React.FC = () => {
               {/* Support widget */}
               <div className={styles.supportWidget}>
                 <div className={styles.supportIcon}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '22px', color: '#7e3ae4' }}>support_agent</span>
+                  <Icon name="support_agent" size={22} style={{ color: '#7e3ae4' }} />
                 </div>
                 <div>
                   <p className={styles.supportTitle}>¿Necesitas ayuda?</p>

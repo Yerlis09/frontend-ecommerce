@@ -2,6 +2,7 @@ import React from 'react';
 import { type CategoryChipsProps } from '../../types/product.types';
 import { cn } from '../../../../shared/utils/cn';
 import styles from './CategoryChips.module.css';
+import Icon from '../../../../shared/components/ui/Icon/Icon';
 
 export const CategoryChips: React.FC<CategoryChipsProps> = ({
   categories,
@@ -20,9 +21,7 @@ export const CategoryChips: React.FC<CategoryChipsProps> = ({
             )}
             onClick={() => onSelectCategory?.(category.id)}
           >
-            <span className={`material-symbols-outlined ${styles.chipIcon}`}>
-              {category.icon}
-            </span>
+            <Icon name={category.icon} className={styles.chipIcon} />
             <span>{category.name}</span>
           </button>
         ))}

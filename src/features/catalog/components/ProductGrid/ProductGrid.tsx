@@ -2,6 +2,7 @@ import React from 'react';
 import { type Product } from '../../types/product.types';
 import styles from './ProductGrid.module.css';
 import { ProductCard } from './ProductCard/ProductCard';
+import Icon from '../../../../shared/components/ui/Icon/Icon';
 
 interface ProductGridProps {
   products: Product[];
@@ -36,10 +37,8 @@ export const ProductGrid: React.FC<ProductGridProps> = ({
               onViewAll();
             }}
           >
-            View All
-            <span className="material-symbols-outlined text-sm">
-              arrow_forward_ios
-            </span>
+            Ver todos
+            <Icon name="arrow_forward_ios" size={14} />
           </a>
         )}
       </div>

@@ -5,6 +5,7 @@ import type { PaymentResponseDto } from '../../../services/payments.service';
 import { Footer } from '../../../shared/components/layout/Footer/Footer';
 import { Navbar } from '../../../shared/components/layout/Navbar/Navbar';
 import { formatCOP, fromCents } from '../../../shared/utils/currency';
+import Icon from '../../../shared/components/ui/Icon/Icon';
 import { clearCart } from '../../../store/cartSlice';
 import type { AppDispatch, RootState } from '../../../store/store';
 import styles from './OrderConfirmedPage.module.css';
@@ -113,10 +114,10 @@ export const OrderConfirmedPage: React.FC = () => {
         <Navbar cartItemCount={0} onCartClick={() => navigate('/cart')} />
         <main className={styles.page}>
           <div className={styles.emptyState}>
-            <span className="material-symbols-outlined" style={{ fontSize: '64px', color: '#cbd5e1' }}>receipt_long</span>
+            <Icon name="receipt_long" size={64} style={{ color: '#cbd5e1' }} />
             <h2 className={styles.emptyTitle}>No encontramos una orden</h2>
             <button className={styles.btnPrimary} onClick={() => navigate('/')}>
-              <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>arrow_back</span>
+              <Icon name="arrow_back" size={20} />
               Ir a la tienda
             </button>
           </div>
@@ -137,15 +138,13 @@ export const OrderConfirmedPage: React.FC = () => {
       {/* ── Toast ── */}
       {showToast && isApproved && (
         <div className={styles.toast}>
-          <span className="material-symbols-outlined" style={{ fontSize: '20px', color: '#22c55e', flexShrink: 0 }}>
-            check_circle
-          </span>
+          <Icon name="check_circle" size={20} style={{ color: '#22c55e', flexShrink: 0 }} />
           <div>
             <p className={styles.toastTitle}>Confirmación enviada</p>
             <p className={styles.toastSub}>Enviamos los detalles a tu correo ✉️</p>
           </div>
           <button className={styles.toastClose} onClick={() => setShowToast(false)}>
-            <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>close</span>
+            <Icon name="close" size={18} />
           </button>
         </div>
       )}
@@ -162,9 +161,7 @@ export const OrderConfirmedPage: React.FC = () => {
           <div className={styles.successHeader}>
             <div className={styles.iconRing} style={{ background: cfg.ringBg }}>
               <div className={styles.iconCircle} style={{ background: cfg.iconBg }}>
-                <span className="material-symbols-outlined" style={{ fontSize: '64px', color: cfg.iconColor }}>
-                  {cfg.icon}
-                </span>
+                <Icon name={cfg.icon} size={64} style={{ color: cfg.iconColor }} />
               </div>
             </div>
             <h1 className={styles.title} style={{ color: cfg.iconColor }}>{cfg.title}</h1>
@@ -216,9 +213,7 @@ export const OrderConfirmedPage: React.FC = () => {
               {/* Delivery estimate */}
               <div className={styles.deliveryCard}>
                 <div className={styles.deliveryIconBox}>
-                  <span className="material-symbols-outlined" style={{ fontSize: '24px', color: '#7e3ae4' }}>
-                    local_shipping
-                  </span>
+                  <Icon name="local_shipping" size={24} style={{ color: '#7e3ae4' }} />
                 </div>
                 <div>
                   <p className={styles.infoLabel}>Entrega Estimada</p>
@@ -236,9 +231,7 @@ export const OrderConfirmedPage: React.FC = () => {
                   </p>
                   <p className={styles.summaryTotal}>{totalCOP}</p>
                 </div>
-                <span className="material-symbols-outlined" style={{ fontSize: '48px', color: '#7e3ae4', opacity: 0.2, flexShrink: 0 }}>
-                  shopping_bag
-                </span>
+                <Icon name="shopping_bag" size={48} style={{ color: '#7e3ae4', opacity: 0.2, flexShrink: 0 }} />
               </div>
 
             </div>
@@ -255,7 +248,7 @@ export const OrderConfirmedPage: React.FC = () => {
               </button>
             ) : (
               <button className={styles.btnPrimary} onClick={() => navigate(-1 as never)}>
-                <span className="material-symbols-outlined" style={{ fontSize: '18px' }}>refresh</span>
+                <Icon name="refresh" size={18} />
                 Intentar de nuevo
               </button>
             )}
@@ -276,7 +269,7 @@ export const OrderConfirmedPage: React.FC = () => {
 
           {/* ── Help link ── */}
           <a href="#" className={styles.helpLink}>
-            <span className="material-symbols-outlined" style={{ fontSize: '16px' }}>help</span>
+            <Icon name="help" size={16} />
             ¿Necesitas ayuda con tu pedido?
           </a>
 

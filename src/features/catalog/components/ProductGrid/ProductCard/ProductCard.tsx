@@ -4,6 +4,7 @@ import styles from './ProductCard.module.css';
 import { cn } from '../../../../../shared/utils/cn';
 import type { ProductCardProps } from '../../../types/product.types';
 import { formatCOP } from '../../../../../shared/utils/formatedCOP';
+import Icon from '../../../../../shared/components/ui/Icon/Icon';
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
@@ -51,7 +52,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
           onClick={handleFavorite}
           aria-label="Add to favorites"
         >
-          <span className="material-symbols-outlined text-[20px]">favorite</span>
+          <Icon name="favorite" size={20} />
         </button>
         <img
           src={image}
@@ -64,11 +65,9 @@ export const ProductCard: React.FC<ProductCardProps> = ({
       <div className={styles.content}>
         <span className={styles.brand}>{brand}</span>
         <h3 className={styles.title}>{name}</h3>
-        
+
         <div className={styles.rating}>
-          <span className={`material-symbols-outlined ${styles.starIcon}`}>
-            star
-          </span>
+          <Icon name="star" className={styles.starIcon} />
           <span className={styles.ratingText}>
             {rating} ({reviewCount})
           </span>
@@ -85,13 +84,13 @@ export const ProductCard: React.FC<ProductCardProps> = ({
               {formatCOP(price)}
             </span>
           </div>
-          
+
           <button
             className={styles.addToCartButton}
             onClick={handleAddToCart}
             aria-label="Add to cart"
           >
-            <span className="material-symbols-outlined">add_shopping_cart</span>
+            <Icon name="add_shopping_cart" />
           </button>
         </div>
       </div>

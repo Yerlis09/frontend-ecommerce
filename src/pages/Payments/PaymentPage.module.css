@@ -78,6 +78,9 @@
   }
 }
 
+/* Prevent grid children from overflowing their track */
+.layout > * { min-width: 0; }
+
 /* ── Card (left column) ── */
 .card {
   background: #fff;
@@ -338,8 +341,14 @@
 
 .twoCol {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 16px;
+}
+
+@media (min-width: 400px) {
+  .twoCol {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .label {
@@ -751,4 +760,71 @@
   font-size: 0.875rem;
   color: #94a3b8;
   margin: 0;
+}
+
+/* ── Mobile responsive ──────────────────────────────────────────────────── */
+@media (max-width: 639px) {
+  /* Page: tighter padding + safety-net to swallow any stray overflow */
+  .page {
+    padding: 20px 12px 48px;
+    overflow-x: hidden;
+  }
+
+  /* Stepper: allow wrapping so it never overflows */
+  .stepper {
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    gap: 4px 6px;
+    margin-bottom: 20px;
+  }
+  .stepSep { margin: 0 2px; }
+
+  /* Card: less padding + overflow hidden to contain tabs */
+  .card {
+    padding: 16px;
+    overflow: hidden;
+  }
+
+  /* Tabs: scroll horizontally, hide scrollbar */
+  .tabs {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;       /* Firefox */
+  }
+  .tabs::-webkit-scrollbar { display: none; } /* Chrome / Safari */
+
+  /* Tabs: smaller padding so all 4 fit or scroll cleanly */
+  .tab {
+    padding: 10px 10px;
+    font-size: 0.75rem;
+    gap: 4px;
+  }
+
+  /* Credit card visual: prevent it from poking outside */
+  .cardVisualWrapper {
+    padding: 12px 0 4px;
+    overflow: hidden;
+  }
+
+  /* Form: smaller gaps on mobile */
+  .formFields { gap: 16px; }
+
+  /* Security note: compact */
+  .securityNote { padding: 10px 12px; }
+
+  /* Right column summary card: tighter */
+  .summaryCard {
+    padding: 16px;
+    gap: 14px;
+    /* Remove sticky on mobile — it's stacked, not side-by-side */
+    position: static;
+  }
+
+  /* Summary item text: slightly smaller */
+  .summaryItemName { font-size: 0.75rem; }
+  .summaryItemMeta { font-size: 0.7rem; }
+  .summaryItemPrice { font-size: 0.8125rem; }
+
+  /* Support widget: wrap on tiny screens */
+  .supportWidget { flex-wrap: wrap; }
 }
