@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import type { RootState } from '../store/store';
-import { paymentsService } from '../services/payments.service';
-import type { PaymentResponseDto } from '../services/payments.service';
-import type { TransactionStatus } from '../shared/types/common.types';
-import type { ApiError } from '../shared/types/api.types';
-import { formatCOP, fromCents } from '../shared/utils/currency';
-import { Navbar } from '../shared/components/layout/Navbar/Navbar';
-import { Footer } from '../shared/components/layout/Footer/Footer';
+import type { RootState } from '../../../store/store';
+import { paymentsService } from '../../../services/payments.service';
+import type { PaymentResponseDto } from '../../../services/payments.service';
+import type { TransactionStatus } from '../../../shared/types/common.types';
+import type { ApiError } from '../../../shared/types/api.types';
+import { formatCOP, fromCents } from '../../../shared/utils/currency';
+import { Navbar } from '../../../shared/components/layout/Navbar/Navbar';
+import { Footer } from '../../../shared/components/layout/Footer/Footer';
 import styles from './OrdersPage.module.css';
 
 // ── Status config ──────────────────────────────────────────────────────────────

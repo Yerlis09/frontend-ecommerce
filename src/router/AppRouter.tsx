@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { CartPage } from '../pages/Cart/CartPage';
-import { CheckoutPage } from '../pages/CheckoutPage';
+import { CheckoutPage } from '../pages/Checkout/CheckoutPage';
 import { HomePage } from '../pages/Home/HomePage';
 import { OrderConfirmedPage } from '../pages/Order/Confirmed/OrderConfirmedPage';
-import { OrdersPage } from '../pages/OrdersPage';
+import { OrdersPage } from '../pages/Order/Orders/OrdersPage';
 import { PaymentPage } from '../pages/Payments/PaymentPage';
 import { ProductDetailPage } from '../pages/ProducDetail/ProductDetailPage';
 

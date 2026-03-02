@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import type { RootState } from '../store/store';
-import { useCart } from '../features/cart/hooks/useCart';
-import { customersService } from '../services/customers.service';
-import type { ApiError } from '../shared/types/api.types';
-import { useToast } from '../shared/hooks/useToast';
-import { Navbar } from '../shared/components/layout/Navbar/Navbar';
-import { Footer } from '../shared/components/layout/Footer/Footer';
-import { formatCOP } from '../shared/utils/currency';
+import type { RootState } from '../../store/store';
+import { useCart } from '../../features/cart/hooks/useCart';
+import { customersService } from '../../services/customers.service';
+import type { ApiError } from '../../shared/types/api.types';
+import { useToast } from '../../shared/hooks/useToast';
+import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
+import { Footer } from '../../shared/components/layout/Footer/Footer';
+import { formatCOP } from '../../shared/utils/currency';
 import styles from './CheckoutPage.module.css';
 
 // ── Colombian departments + cities ───────────────────────────────────────────
