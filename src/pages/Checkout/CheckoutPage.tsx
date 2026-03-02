@@ -36,7 +36,6 @@ const SHIPPING_OPTIONS = [
   { id: 'express',  label: 'Express',  description: '1-2 días hábiles', price: 15000 },
 ] as const;
 
-const IVA_RATE = 0.19;
 
 // ── Types ────────────────────────────────────────────────────────────────────
 interface FormData {
@@ -87,9 +86,7 @@ export const CheckoutPage: React.FC = () => {
 
   // Calculations
   const shippingCost = SHIPPING_OPTIONS.find((o) => o.id === shipping)!.price;
-  const taxableBase  = subtotal - discountAmount;
-  const iva          = Math.round(taxableBase * IVA_RATE);
-  const orderTotal   = taxableBase + shippingCost + iva;
+  const orderTotal   = subtotal - discountAmount + shippingCost;
 
   // ── Empty cart redirect ───────────────────────────────────────────────────
   if (isEmpty) {
@@ -657,11 +654,6 @@ export const CheckoutPage: React.FC = () => {
                   <div className={styles.priceLine}>
                     <span className={styles.priceLineLabel}>Envío</span>
                     <span className={styles.priceLineValue}>{formatCOP(shippingCost)}</span>
-                  </div>
-
-                  <div className={styles.priceLine}>
-                    <span className={styles.priceLineLabel}>Impuestos (19%)</span>
-                    <span className={styles.priceLineValue}>{formatCOP(iva)}</span>
                   </div>
 
                   <div className={styles.totalRow}>

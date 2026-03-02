@@ -77,10 +77,7 @@ export const PaymentPage: React.FC = () => {
 
   const { customerData, shippingCost = 5000 } = state ?? {};
 
-  const IVA_RATE   = 0.19;
-  const taxBase    = subtotal - discountAmount;
-  const iva        = Math.round(taxBase * IVA_RATE);
-  const orderTotal = taxBase + (shippingCost ?? 0) + iva;
+  const orderTotal = subtotal - discountAmount + (shippingCost ?? 0);
 
   // Form state
   const [activeTab, setActiveTab]       = useState<PaymentTab>('card');
@@ -439,10 +436,6 @@ export const PaymentPage: React.FC = () => {
                 <div className={styles.breakdownLine}>
                   <span className={styles.breakdownLabel}>Envío</span>
                   <span className={styles.breakdownValue}>{formatCOP(shippingCost ?? 0)}</span>
-                </div>
-                <div className={styles.breakdownLine}>
-                  <span className={styles.breakdownLabel}>Impuestos (19%)</span>
-                  <span className={styles.breakdownValue}>{formatCOP(iva)}</span>
                 </div>
               </div>
 
