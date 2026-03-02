@@ -19,10 +19,10 @@ export const useCardTokenization = () => {
           exp_year: cardData.expYear,
           card_holder: cardData.cardHolder,
         },
-        WOMPI_PUBLIC_KEY
+        
       );
       return token;
-    } catch {
+    } catch (error: any | unknown) {
       setTokenError('Error al procesar la tarjeta. Verifica los datos e intenta de nuevo.');
       return null;
     } finally {
