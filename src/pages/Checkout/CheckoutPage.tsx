@@ -32,11 +32,6 @@ const findDepartment = (city: string): string => {
   return '';
 };
 
-const SHIPPING_OPTIONS = [
-  { id: 'standard', label: 'Estándar', description: '3-5 días hábiles', price: 5000  },
-  { id: 'express',  label: 'Express',  description: '1-2 días hábiles', price: 15000 },
-] as const;
-
 
 // ── Types ────────────────────────────────────────────────────────────────────
 interface FormData {
