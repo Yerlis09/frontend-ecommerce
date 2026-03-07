@@ -76,9 +76,9 @@ export const PaymentPage: React.FC = () => {
     }
   }, [state, isEmpty, navigate]);
 
-  const { customerData, shippingCost = 5000 } = state ?? {};
+  const { customerData} = state ?? {};
 
-  const orderTotal = subtotal - discountAmount + (shippingCost ?? 0);
+  const orderTotal = subtotal - discountAmount;
 
   // Form state
   const [activeTab, setActiveTab]       = useState<PaymentTab>('card');
@@ -421,10 +421,6 @@ export const PaymentPage: React.FC = () => {
                     <span>-{formatCOP(discountAmount)}</span>
                   </div>
                 )}
-                <div className={styles.breakdownLine}>
-                  <span className={styles.breakdownLabel}>Envío</span>
-                  <span className={styles.breakdownValue}>{formatCOP(shippingCost ?? 0)}</span>
-                </div>
               </div>
 
               {/* Total */}

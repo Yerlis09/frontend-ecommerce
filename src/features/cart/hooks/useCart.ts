@@ -1,13 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
-import type { RootState, AppDispatch } from '../../../store/store';
 import {
   addItem as addItemAction,
+  applyDiscount as applyDiscountAction,
+  clearCart,
+  clearDiscount as clearDiscountAction,
   removeItem as removeItemAction,
   updateQuantity as updateQuantityAction,
-  applyDiscount as applyDiscountAction,
-  clearDiscount as clearDiscountAction,
-  clearCart,
 } from '../../../store/cartSlice';
+import type { AppDispatch, RootState } from '../../../store/store';
 import type { ProductResponseDto } from '../../catalog/types/product.types';
 
 /** Hook de conveniencia que expone el store Redux del carrito */
@@ -19,9 +19,7 @@ export const useCart = () => {
 
   const subtotal = items.reduce((sum, i) => sum + i.product.price * i.quantity, 0);
   const discountAmount = Math.round(subtotal * (discountPercentage / 100));
-  const BASE_FEE = 10;
-  const DELIVERY_FEE = 50;
-  const total = subtotal - discountAmount + BASE_FEE + DELIVERY_FEE;
+  const total = subtotal - discountAmount;
   const totalItems = items.reduce((sum, i) => sum + i.quantity, 0);
 
   return {

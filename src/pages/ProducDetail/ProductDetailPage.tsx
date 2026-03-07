@@ -6,8 +6,8 @@ import { QuantityStepper } from '../../features/product-detail/components/Quanti
 import { useProductDetail } from '../../features/product-detail/hooks/useProductDetail';
 import { Footer } from '../../shared/components/layout/Footer/Footer';
 import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
-import { Skeleton } from '../../shared/components/ui/Skeleton/Skeleton';
 import Icon from '../../shared/components/ui/Icon/Icon';
+import { Skeleton } from '../../shared/components/ui/Skeleton/Skeleton';
 import { useToast } from '../../shared/hooks/useToast';
 import { formatCOP } from '../../shared/utils/currency';
 import { addItem as addItemAction } from '../../store/cartSlice';
@@ -261,9 +261,6 @@ export const ProductDetailPage: React.FC = () => {
                       <Icon name="keyboard_arrow_down" className={styles.accordionChevron} />
                     </summary>
                     <div className={styles.accordionBody}>
-                      <p style={{ marginBottom: '8px' }}>
-                        <strong>Envío:</strong> Tarifa fija de $50 COP. Entrega en 3–5 días hábiles.
-                      </p>
                       <p>
                         <strong>Devoluciones:</strong> Tienes 30 días para devolver tu producto si no
                         estás satisfecho. El producto debe estar en su estado original.

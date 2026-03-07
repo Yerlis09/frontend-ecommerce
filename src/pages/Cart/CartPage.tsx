@@ -4,12 +4,10 @@ import { useCart } from '../../features/cart/hooks/useCart';
 import { discountCodesService } from '../../services/discount-codes.service';
 import { Footer } from '../../shared/components/layout/Footer/Footer';
 import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
-import { formatCOP } from '../../shared/utils/currency';
 import Icon from '../../shared/components/ui/Icon/Icon';
+import { formatCOP } from '../../shared/utils/currency';
 import styles from './CartPage.module.css';
 
-// Matches BASE_FEE in useCart.ts
-const SERVICE_FEE = 10;
 
 // ── Payment chip component ─────────────────────────────────────────────────
 const PaymentChip: React.FC<{ label: string; className?: string }> = ({ label, className }) => (
@@ -296,19 +294,6 @@ export const CartPage: React.FC = () => {
                     <span>-{formatCOP(discountAmount)}</span>
                   </div>
                 )}
-
-                <div className={styles.summaryLine}>
-                  <span className={styles.summaryLabelFee}>
-                    Tarifa de servicio
-                    <Icon
-                      name="info"
-                      size={14}
-                      style={{ marginLeft: '4px', cursor: 'help' }}
-                      title="Tarifa por procesamiento de pagos seguros"
-                    />
-                  </span>
-                  <span className={styles.summaryValue}>{formatCOP(SERVICE_FEE)}</span>
-                </div>
 
                 <div className={styles.summaryLine}>
                   <span className={styles.summaryLabel}>Envío</span>

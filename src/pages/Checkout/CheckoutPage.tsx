@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import type { RootState } from '../../store/store';
+import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../features/cart/hooks/useCart';
 import { customersService } from '../../services/customers.service';
-import type { ApiError } from '../../shared/types/api.types';
-import { useToast } from '../../shared/hooks/useToast';
-import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
 import { Footer } from '../../shared/components/layout/Footer/Footer';
-import { formatCOP } from '../../shared/utils/currency';
+import { Navbar } from '../../shared/components/layout/Navbar/Navbar';
 import Icon from '../../shared/components/ui/Icon/Icon';
+import { useToast } from '../../shared/hooks/useToast';
+import type { ApiError } from '../../shared/types/api.types';
+import { formatCOP } from '../../shared/utils/currency';
+import type { RootState } from '../../store/store';
 import styles from './CheckoutPage.module.css';
 
 // ── Colombian departments + cities ───────────────────────────────────────────
@@ -78,7 +78,6 @@ export const CheckoutPage: React.FC = () => {
   // Form state
   const [form, setForm]       = useState<FormData>(initialForm);
   const [touched, setTouched] = useState<Partial<Record<keyof FormData, boolean>>>({});
-  const [shipping, setShipping] = useState<'standard' | 'express'>('standard');
 
   // Customer lookup state
   const [lookupStatus, setLookupStatus]         = useState<LookupStatus>('idle');
@@ -86,8 +85,8 @@ export const CheckoutPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting]         = useState(false);
 
   // Calculations
-  const shippingCost = SHIPPING_OPTIONS.find((o) => o.id === shipping)!.price;
-  const orderTotal   = subtotal - discountAmount + shippingCost;
+
+  const orderTotal   = subtotal - discountAmount;
 
   // ── Empty cart redirect ───────────────────────────────────────────────────
   if (isEmpty) {
@@ -225,7 +224,6 @@ export const CheckoutPage: React.FC = () => {
       navigate('/payment', {
         state: {
           customerId,
-          shippingCost,
           customerData: {
             email:      form.email.trim(),
             fullName:   `${form.firstName.trim()} ${form.lastName.trim()}`,
@@ -540,36 +538,6 @@ export const CheckoutPage: React.FC = () => {
                   </div>
 
                 </div>
-
-                {/* Shipping method */}
-                <h3 className={styles.shippingMethodTitle}>Método de Envío</h3>
-                <div className={styles.shippingOptions}>
-                  {SHIPPING_OPTIONS.map((option) => {
-                    const selected = shipping === option.id;
-                    return (
-                      <label key={option.id} htmlFor={`ship-${option.id}`}
-                        className={`${styles.shippingCard} ${selected ? styles.shippingCardSelected : ''}`}
-                      >
-                        <input
-                          id={`ship-${option.id}`} type="radio"
-                          name="shipping-method" value={option.id}
-                          checked={selected}
-                          onChange={() => setShipping(option.id)}
-                          className={styles.srOnly}
-                        />
-                        <div className={styles.shippingCardBody}>
-                          <span className={styles.shippingLabel}>{option.label}</span>
-                          <span className={styles.shippingDesc}>{option.description}</span>
-                          <span className={styles.shippingPrice}>{formatCOP(option.price)}</span>
-                        </div>
-                        <span className={`${styles.shippingBorderOverlay} ${selected ? styles.shippingBorderOverlaySelected : ''}`} />
-                        <span className={`${styles.radioOuter} ${selected ? styles.radioOuterSelected : ''}`}>
-                          <span className={`${styles.radioDot} ${selected ? styles.radioDotSelected : ''}`} />
-                        </span>
-                      </label>
-                    );
-                  })}
-                </div>
               </section>
 
             </div>
@@ -617,11 +585,6 @@ export const CheckoutPage: React.FC = () => {
                       <span>-{formatCOP(discountAmount)}</span>
                     </div>
                   )}
-
-                  <div className={styles.priceLine}>
-                    <span className={styles.priceLineLabel}>Envío</span>
-                    <span className={styles.priceLineValue}>{formatCOP(shippingCost)}</span>
-                  </div>
 
                   <div className={styles.totalRow}>
                     <span className={styles.totalLabel}>Total</span>
